@@ -37,5 +37,5 @@
             "DoctrineRestDriver": ""
         }
     },
-    "target-dir": "24sessions/DoctrineRestDriver"
+    "target-dir": "DoctrineRestDriver"
 }
