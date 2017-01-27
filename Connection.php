@@ -18,10 +18,8 @@
 
 namespace Circle\DoctrineRestDriver;
 
-use Circle\DoctrineRestDriver\Annotations\RoutingTable;
-use Doctrine\Common\EventManager;
-use Doctrine\DBAL\Configuration;
 use Doctrine\DBAL\Connection as AbstractConnection;
+use Circle\DoctrineRestDriver\Validation\Assertions;
 
 /**
  * Doctrine connection for the rest driver
@@ -35,22 +33,24 @@ class Connection extends AbstractConnection {
      * @var Statement
      */
     private $statement;
-
     /**
-     * @var array
+     * @var string
      */
-    private $routings;
+    private $statementClass;
 
     /**
      * Connection constructor
      *
-     * @param array        $params
-     * @param Driver       $driver
-     * @param RoutingTable $routings
+     * @param array         $params
+     * @param Driver        $driver
      */
-    public function __construct(array $params, Driver $driver, RoutingTable $routings, Configuration $config = null, EventManager $eventManager = null) {
-        $this->routings = $routings;
-        parent::__construct($params, $driver, $config, $eventManager);
+    public function __construct(array $params, Driver $driver) {
+        parent::__construct($params, $driver);
+
+        $statementClass = !empty($params['driverOptions']['statement_class']) ? $params['driverOptions']['statement_class'] : 'Statement';
+        $className = preg_match('/\\\\/', $statementClass) ? $statementClass : 'Circle\DoctrineRestDriver\\' . $statementClass;
+        Assertions::assertClassExists($className);
+        $this->statementClass = $className;
     }
 
     /**
@@ -62,7 +62,8 @@ class Connection extends AbstractConnection {
     public function prepare($statement) {
         $this->connect();
 
-        $this->statement = new Statement($statement, $this->getParams(), $this->routings);
+        $sClass = $this->statementClass;
+        $this->statement = new $sClass($statement, $this->getParams());
         $this->statement->setFetchMode($this->defaultFetchMode);
 
         return $this->statement;

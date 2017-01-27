@@ -44,7 +44,7 @@ class Request {
     /**
      * @var array
      */
-    private $curlOptions = [];
+    private $curlOptions;
 
     /**
      * @var string
@@ -52,40 +52,20 @@ class Request {
     private $query;
 
     /**
-     * @var int
-     */
-    private $expectedStatusCode = 200;
-
-    /**
      * Request constructor
      *
-     * @param array $options
-     *
-     * @SuppressWarnings("PHPMD.StaticAccess")
+     * @param string      $method
+     * @param string      $url
+     * @param array       $curlOptions
+     * @param string|null $query
+     * @param string|null $payload
      */
-    public function __construct(array $options) {
-        HashMap::assert($options, 'options');
-        HashMapEntry::assertExists($options, 'method', 'options.method');
-        HashMapEntry::assertExists($options, 'url', 'options.url');
-
-        foreach($options as $key => $value) $this->$key = $value;
-    }
-
-    /**
-     * sets the curl options
-     *
-     * @param  array $options
-     * @return Request
-     */
-    public function setCurlOptions(array $options) {
-        return new Request([
-            'method'              => $this->method,
-            'url'                 => $this->url,
-            'curlOptions'         => $options,
-            'query'               => $this->query,
-            'payload'             => $this->payload,
-            'expectedStatusCode'  => $this->expectedStatusCode
-        ]);
+    public function __construct($method, $url, array $curlOptions, $query = null, $payload = null) {
+        $this->method      = $method;
+        $this->url         = $url;
+        $this->payload     = $payload;
+        $this->curlOptions = $curlOptions;
+        $this->query       = $query;
     }
 
     /**
@@ -125,12 +105,34 @@ class Request {
     }
 
     /**
+     * Set all curl options
+     *
+     * @param $curlOptions
+     * @return $this
+     */
+    public function setCurlOptions($curlOptions) {
+        $this->curlOptions = $curlOptions;
+        return $this;
+    }
+
+    /**
      * Returns the query
      *
      * @return string
      */
     public function getQuery() {
         return $this->query;
+    }
+
+    /**
+     * Set the query
+     *
+     * @param string $query
+     * @return $this
+     */
+    public function setQuery($query) {
+        $this->query = $query;
+        return $this;
     }
 
     /**
@@ -143,18 +145,9 @@ class Request {
     }
 
     /**
-     * returns the expected response http code
-     *
-     * @return int
-     */
-    public function getExpectedStatusCode() {
-        return $this->expectedStatusCode;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function __toString() {
-        return strtoupper($this->method) . ' ' . $this->getUrlAndQuery() . ' HTTP/1.1' . (!empty($this->payload) ? ' ' . $this->payload : '');
+        return $this->method . ' ' . $this->getUrlAndQuery() . ' HTTP/1.1' . (!empty($this->payload) ? ' ' . $this->payload : '');
     }
 }

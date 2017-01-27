@@ -26,7 +26,7 @@ namespace Circle\DoctrineRestDriver\Exceptions;
  *
  * @SuppressWarnings("PHPMD.StaticAccess")
  */
-class InvalidSqlOperationException extends DoctrineRestDriverException {
+class InvalidSqlOperationException extends \Exception {
 
     /**
      * InvalidSqlOperationException constructor

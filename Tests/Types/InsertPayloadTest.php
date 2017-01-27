@@ -18,103 +18,71 @@
 
 namespace Circle\DoctrineRestDriver\Tests\Types;
 
-use Circle\DoctrineRestDriver\Types\InsertChangeSet;
+use Circle\DoctrineRestDriver\Types\Id;
+use Circle\DoctrineRestDriver\Types\InsertPayload;
 use PHPSQLParser\PHPSQLParser;
 
 /**
- * Tests the insert change set type
+ * Tests the insert payload type
  *
  * @author    Tobias Hauck <tobias@circle.ai>
  * @copyright 2015 TeeAge-Beatz UG
  *
- * @coversDefaultClass Circle\DoctrineRestDriver\Types\InsertChangeSet
+ * @coversDefaultClass Circle\DoctrineRestDriver\Types\InsertPayload
  */
-class InsertChangeSetTest extends \PHPUnit_Framework_TestCase {
+class InsertPayloadTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * @test
      * @group  unit
      * @covers ::create
-     * @covers ::<private>
      *
      * @SuppressWarnings("PHPMD.StaticAccess")
      */
     public function createWithRawValues() {
         $parser   = new PHPSQLParser();
         $tokens   = $parser->parse('INSERT INTO products (name, value) VALUES (testname, testvalue)');
-        $expected = [
+        $expected = json_encode([
             'name'  => 'testname',
             'value' => 'testvalue',
-        ];
+        ]);
 
-        $this->assertSame($expected, InsertChangeSet::create($tokens));
+        $this->assertSame($expected, InsertPayload::create($tokens));
     }
 
     /**
      * @test
      * @group  unit
      * @covers ::create
-     * @covers ::<private>
      *
      * @SuppressWarnings("PHPMD.StaticAccess")
      */
     public function createWithQuotedValues() {
         $parser   = new PHPSQLParser();
-        $tokens   = $parser->parse('INSERT INTO products (name, value) VALUES ("testname", `testvalue`)');
-        $expected = [
+        $tokens   = $parser->parse('INSERT INTO products (name, value) VALUES ("testname", "testvalue")');
+        $expected = json_encode([
             'name'  => 'testname',
             'value' => 'testvalue',
-        ];
+        ]);
 
-        $this->assertSame($expected, InsertChangeSet::create($tokens));
+        $this->assertSame($expected, InsertPayload::create($tokens));
     }
 
     /**
      * @test
      * @group  unit
      * @covers ::create
-     * @covers ::<private>
      *
      * @SuppressWarnings("PHPMD.StaticAccess")
      */
     public function createWithIntValue() {
         $parser   = new PHPSQLParser();
         $tokens   = $parser->parse('INSERT INTO products (name, value) VALUES (testname, 1)');
-        $expected = [
+        $expected = json_encode([
             'name'  => 'testname',
             'value' => 1,
-        ];
+        ]);
 
-        $this->assertSame($expected, InsertChangeSet::create($tokens));
-    }
-
-    /**
-     * @test
-     * @group  unit
-     * @covers ::values
-     *
-     * @SuppressWarnings("PHPMD.StaticAccess")
-     */
-    public function values() {
-        $parser   = new PHPSQLParser();
-        $tokens   = $parser->parse('INSERT INTO products (name, value) VALUES (testname, testvalue)');
-        $expected = ['testname', 'testvalue'];
-
-        $this->assertEquals($expected, InsertChangeSet::values($tokens));
-    }
-
-    /**
-     * @test
-     * @group  unit
-     * @covers ::columns
-     *
-     * @SuppressWarnings("PHPMD.StaticAccess")
-     */
-    public function columns() {
-        $parser   = new PHPSQLParser();
-        $tokens   = $parser->parse('INSERT INTO products (name, value) VALUES (testname, testvalue)');
-        $expected = ['name', 'value'];
-
-        $this->assertEquals($expected, InsertChangeSet::columns($tokens));
+        $this->assertSame($expected, InsertPayload::create($tokens));
     }
 }

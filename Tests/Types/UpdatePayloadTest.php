@@ -16,16 +16,36 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Annotations;
+namespace Circle\DoctrineRestDriver\Tests\Types;
+
+use Circle\DoctrineRestDriver\Types\UpdatePayload;
+use PHPSQLParser\PHPSQLParser;
 
 /**
- * Annotation to declare a get all route for an entity
+ * Tests the UpdatePayload type
  *
  * @author    Tobias Hauck <tobias@circle.ai>
  * @copyright 2015 TeeAge-Beatz UG
  *
- * @Annotation
+ * @coversDefaultClass Circle\DoctrineRestDriver\Types\UpdatePayload
  */
-class Fetch implements DataSource {
-    use Route;
+class UpdatePayloadTest extends \PHPUnit_Framework_TestCase {
+
+    /**
+     * @test
+     * @group  unit
+     * @covers ::create
+     *
+     * @SuppressWarnings("PHPMD.StaticAccess")
+     */
+    public function create() {
+        $parser   = new PHPSQLParser();
+        $tokens   = $parser->parse('UPDATE products set name="testname", value="testvalue" WHERE id=1');
+        $expected = json_encode([
+            'name'  => 'testname',
+            'value' => 'testvalue',
+        ]);
+
+        $this->assertSame($expected, UpdatePayload::create($tokens));
+    }
 }

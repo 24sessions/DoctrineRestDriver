@@ -29,7 +29,7 @@ use Circle\DoctrineRestDriver\Types\Request;
  *
  * @SuppressWarnings("PHPMD.StaticAccess")
  */
-class RequestFailedException extends DoctrineRestDriverException {
+class RequestFailedException extends \Exception {
 
     /**
      * RequestFailedException constructor
@@ -39,6 +39,6 @@ class RequestFailedException extends DoctrineRestDriverException {
      * @param string  $errorMessage
      */
     public function __construct(Request $request, $errorCode, $errorMessage) {
-        parent::__construct('Execution failed for request: ' . $request . ': HTTPCode ' . $errorCode . ', body ' . $errorMessage, $errorCode);
+        parent::__construct('Execution failed for request: ' . $request . ': HTTPCode ' . $errorCode . ', body ' . $errorMessage);
     }
 }

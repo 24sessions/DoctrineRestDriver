@@ -18,18 +18,18 @@
 
 namespace Circle\DoctrineRestDriver\Tests\Types;
 
-use Circle\DoctrineRestDriver\Types\Identifier;
+use Circle\DoctrineRestDriver\Types\Id;
 use PHPSQLParser\PHPSQLParser;
 
 /**
- * Tests the identifier type
+ * Tests the id type
  *
  * @author    Tobias Hauck <tobias@circle.ai>
  * @copyright 2015 TeeAge-Beatz UG
  *
- * @coversDefaultClass Circle\DoctrineRestDriver\Types\Identifier
+ * @coversDefaultClass Circle\DoctrineRestDriver\Types\Id
  */
-class IdentifierTest extends \PHPUnit_Framework_TestCase {
+class IdTest extends \PHPUnit_Framework_TestCase {
 
     /**
      * @test
@@ -42,7 +42,7 @@ class IdentifierTest extends \PHPUnit_Framework_TestCase {
         $parser = new PHPSQLParser();
         $tokens = $parser->parse('SELECT name FROM products WHERE id=1');
 
-        $this->assertSame('1', Identifier::create($tokens));
+        $this->assertSame('1', Id::create($tokens));
     }
 
     /**
@@ -56,7 +56,7 @@ class IdentifierTest extends \PHPUnit_Framework_TestCase {
         $parser = new PHPSQLParser();
         $tokens = $parser->parse('SELECT name FROM products WHERE name="test"');
 
-        $this->assertSame('', Identifier::create($tokens));
+        $this->assertSame('', Id::create($tokens));
     }
 
     /**
@@ -70,36 +70,6 @@ class IdentifierTest extends \PHPUnit_Framework_TestCase {
         $parser = new PHPSQLParser();
         $tokens = $parser->parse('SELECT name FROM products WHERE id=1');
 
-        $this->assertSame('id', Identifier::alias($tokens));
-    }
-
-    /**
-     * @test
-     * @group  unit
-     * @covers ::column
-     *
-     * @SuppressWarnings("PHPMD.StaticAccess")
-     */
-    public function column() {
-        $parser = new PHPSQLParser();
-        $tokens = $parser->parse('SELECT name FROM products WHERE id=1');
-
-        $metaDataEntry = $this->getMockBuilder('Doctrine\ORM\Mapping\ClassMetadataInfo')->disableOriginalConstructor()->getMock();
-        $metaDataEntry
-            ->expects($this->once())
-            ->method('getTableName')
-            ->will($this->returnValue('products'));
-        $metaDataEntry
-            ->expects($this->once())
-            ->method('getIdentifierColumnNames')
-            ->will($this->returnValue(['testId']));
-
-        $metaData = $this->getMockBuilder('Circle\DoctrineRestDriver\MetaData')->disableOriginalConstructor()->getMock();
-        $metaData
-            ->expects($this->once())
-            ->method('get')
-            ->will($this->returnValue([$metaDataEntry]));
-
-        $this->assertSame('testId', Identifier::column($tokens, $metaData));
+        $this->assertSame('id', Id::alias($tokens));
     }
 }

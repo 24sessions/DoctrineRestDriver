@@ -10,6 +10,27 @@ And because we have absolutely no idea how to write a programming language, we'r
 # Prerequisites
 
 - You need composer to download the library
+- Your REST API has to return JSON and to adhere to the following rules:
+    - Use POST to create new data
+        - Urls have the following format: ```http://www.host.de/path/to/api/entityName```
+        - Use the request body to receive data
+        - Respond with HTTP code 200 if successful
+        - Fill the response body with the given payload plus an id
+    - Use PUT to change data
+        - Urls have the following format: ```http://www.host.de/path/to/api/entityName/<id>```
+        - Use the request body to receive data
+        - Respond with HTTP code 200 if successful
+        - Fill the response body with the given payload
+    - Use DELETE to remove data
+        - Urls have the following format: ```http://www.host.de/path/to/api/entityName/<id>```
+        - The request body must be empty
+        - Respond with HTTP code 204 if successful
+        - The response body must be empty
+    - Use GET to receive data
+        - Urls have the following format: ```http://www.host.de/path/to/api/entityName/<id>``` or ```http://www.host.de/path/to/api/entityName```
+        - Use HTTP query strings as filters
+        - Respond with HTTP code 200 if successful
+        - Fill the response body with the read data
 
 # Installation
 
@@ -30,8 +51,7 @@ doctrine:
     user:         "%default_api_username%"
     password:     "%default_api_password%"
     options:
-      format:               "json" | "YourOwnNamespaceName" | if not specified json will be used
-      authenticator_class:  "HttpAuthentication" | "YourOwnNamespaceName" | if not specified no authentication will be used
+      authentication_class:  "HttpAuthentication" | "YourOwnNamespaceName" | if not specified no authentication will be used
 ```
 
 Additionally you can add CURL-specific options:
@@ -45,8 +65,7 @@ doctrine:
     user:         "%default_api_username%"
     password:     "%default_api_password%"
     options:
-      format:                         "json"
-      authenticator_class:            "HttpAuthentication"
+      authentication_class:           "HttpAuthentication"
       CURLOPT_CURLOPT_FOLLOWLOCATION: true
       CURLOPT_HEADER:                 true
 ```
@@ -55,18 +74,17 @@ A full list of all possible options can be found here: http://php.net/manual/en/
 
 # Usage
 
-If your API routes follow these few conventions, using the driver is very easy:
+The following code samples show how to use the driver in a Symfony environment. This configuration will be used:
 
-- Each route must be structured the same: ```{apiHost}/{pathToApi}/{tableName}```
-- The PUT, GET (single) and UPDATE routes need to contain an additional ```id```: ```{apiHost}/{pathToApi}/{tableName}/{id}```
-- POST and GET (all) must follow the basic structure: ```{apiHost}/{pathToApi}/{tableName}```
-
-Don't worry, if this is not the case: Luckily, we provide a few annotations for you to configure your own routes.
-
-
-The examples below show how to use the driver in a Symfony environment.
-
-## If your API follows our conventions
+```yml
+doctrine:
+  dbal:
+    driver_class: "Circle\\DoctrineRestDriver\\Driver"
+    host:         "http://www.your-url.com/api"
+    port:         80
+    user:         "Circle"
+    password:     "CantRemember"
+```
 
 First of all create your entities:
 
@@ -79,7 +97,14 @@ use Doctrine\ORM\Mapping as ORM;
  * This annotation marks the class as managed entity:
  *
  * @ORM\Entity
- * @ORM\Table("products")
+ *
+ * You can either only use a resource name or the whole url of
+ * the resource to define your target. In the first case the target 
+ * url will consist of the host, configured in your options and the 
+ * given name. In the second one your argument is used as it is.
+ * Important: The resource name must begin with its protocol.
+ *
+ * @ORM\Table("products|http://www.yourSite.com/api/products")
  */
 class Product {
 
@@ -110,23 +135,8 @@ class Product {
 }
 ```
 
-Afterwards, you are able to use the created entity as if you were using a database.
-
-By using this setting, the driver is performing a lot of magic under the hood:
-
-- It generally uses the request body to send data in JSON format
-- It automatically maps the response into a valid entity if the status code matches the default expected status codes (200 for GET and PUT, 201 for POST 204 for DELETE)
-- It saves the entity as managed doctrine entity
-- It translates INSERT queries into POST requests to create new data
-  - Urls have the following format: ```{apiHost}/{pathToApi}/{tableName}```
-- UPDATE queries will be turned into PUT requests:
-   - Urls have the following format: ```{apiHost}/{pathToApi}/{tableName}/{id}```
-- The DELETE operation will remain:
-  - Urls have the following format: ```{apiHost}/{pathToApi}/{tableName}/{id}```
-- SELECT queries become GET requests:
-  - Urls have the following format: ```{apiHost}/{pathToApi}/{tableName}/{id}``` (if a single entity is requested) or ```{apiHost}/{pathToApi}/{tableName}``` (if all entities are requested)
-
-Let's watch the driver in action by implementing some controller methods. In this example we assume that we have configured the ```host``` setting [(chapter installation)](#installation) with ```http://www.yourSite.com/api```.
+Afterwards you are able to use the created entity as if you were using a database.
+Let's assume we have used the value ```http://www.yourSite.com/api/products``` for the product entity's ```@Table``` annotation.
 
 ```php
 <?php
@@ -144,7 +154,7 @@ class UserController extends Controller {
      * {"name": "Circle"}
      *
      * Let's assume the API responded with:
-     * HTTP/1.1 201 Created
+     * HTTP/1.1 200 OK
      * {"id": 1, "name": "Circle"}
      *
      * Response body is "1"
@@ -239,176 +249,6 @@ class UserController extends Controller {
 }
 ```
 
-## If your API doesn't follow our conventions
-Now it's time to introduce you to some annotations, which help you to configure your own routes. Be sure to use them only with ```Doctrine``` entities. All these annotations have the same structure so we will call them ```DataSource``` annotation:
-
-```php
-@DataSource\SomeName("http://www.myRoute.com", method="POST", statusCode=200)
-```
-
-The ```ROUTE``` value is mandatory, method and statusCode are optional.
-
-To demonstrate their capabilities, let's customize some parts of the previous chapter with the ```DataSource``` annotation:
-
-```php
-namespace CircleBundle\Entity;
-
-use Doctrine\ORM\Mapping as ORM;
-use Circle\DoctrineRestDriver\Annotations as DataSource;
-
-/**
- * This annotation marks the class as managed entity:
- *
- * @ORM\Entity
- * @ORM\Table("products")
- * @DataSource\Select("http://www.yourSite.com/api/products/findOne/{id}")
- * @DataSource\Fetch("http://www.yourSite.com/api/products/findAll")
- * @DataSource\Insert("http://www.yourSite.com/api/products/insert", statusCode=200)
- * @DataSource\Update("http://www.yourSite.com/api/products/update/{id}", method="POST")
- * @DataSource\Delete("http://www.yourSite.com/api/products/remove/{id}", method="POST", statusCode=200)
- */
-class Product {
-
-    /**
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-    
-    /**
-     * @ORM\Column(type="string", length=100)
-     */
-    private $name;
-    
-    public function getId() {
-        return $this->id;
-    }
-    
-    public function setName($name) {
-        $this->name = $name;
-        return $this;
-    }
-    
-    public function getName() {
-        return $this->name;
-    }
-}
-```
-
-The annotations tell the driver to send the requests to the configured URLs for each custom configuration. If you just want to define a specific route for one method, you don't need to use all annotations provided. The ```{id}``` act as a placeholder for the entity's identifier.
-
-```php
-<?php
-
-namespace CircleBundle\Controller;
-
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\HttpFoundation\Response;
-
-class UserController extends Controller {
-
-    /**
-     * Sends the following request to the API:
-     * POST http://www.yourSite.com/api/products/insert HTTP/1.1
-     * {"name": "Circle"}
-     *
-     * Let's assume the API responded with:
-     * HTTP/1.1 200 OK
-     * {"id": 1, "name": "Circle"}
-     *
-     * Response body is "1"
-     */
-    public function createAction() {
-        $em     = $this->getDoctrine()->getManager();
-        $entity = new CircleBundle\Entity\Product();
-        $entity->setName('Circle');
-        $em->persist($entity);
-        $em->flush();
-        
-        return new Response($entity->getId());
-    }
-    
-    /**
-     * Sends the following request to the API by default:
-     * GET http://www.yourSite.com/api/products/findOne/1 HTTP/1.1
-     *
-     * which might respond with:
-     * HTTP/1.1 200 OK
-     * {"id": 1, "name": "Circle"}
-     *
-     * Response body is "Circle"
-     */
-    public function readAction($id = 1) {
-        $em     = $this->getDoctrine()->getManager();
-        $entity = $em->find('CircleBundle\Entity\Product', $id);
-        
-        return new Response($entity->getName());
-    }
-    
-    /**
-     * Sends the following request to the API:
-     * GET http://www.yourSite.com/api/products/findAll HTTP/1.1
-     *
-     * Example response:
-     * HTTP/1.1 200 OK
-     * [{"id": 1, "name": "Circle"}]
-     *
-     * Response body is "Circle"
-     */
-    public function readAllAction() {
-        $em       = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('CircleBundle\Entity\Product')->findAll();
-        
-        return new Response($entities->first()->getName());
-    }
-    
-    /**
-     * After sending a GET request (readAction) it sends the following 
-     * request to the API by default:
-     * POST http://www.yourSite.com/api/products/update/1 HTTP/1.1
-     * {"name": "myName"}
-     *
-     * Let's assume the API responded the GET request with:
-     * HTTP/1.1 200 OK
-     * {"id": 1, "name": "Circle"}
-     *
-     * and the POST request with:
-     * HTTP/1.1 200 OK
-     * {"id": 1, "name": "myName"}
-     *
-     * Then the response body is "myName"
-     */
-    public function updateAction($id = 1) {
-        $em     = $this->getDoctrine()->getManager();
-        $entity = $em->find('CircleBundle\Entity\Product', $id);
-        $entity->setName('myName');
-        $em->flush();
-        
-        return new Response($entity->getName());
-    }
-    
-    /**
-     * After sending a GET request (readAction) it sends the following 
-     * request to the API by default:
-     * POST http://www.yourSite.com/api/products/remove/1 HTTP/1.1
-     *
-     * If the response is:
-     * HTTP/1.1 200 OK
-     *
-     * the response body is ""
-     */
-    public function deleteAction($id = 1) {
-        $em     = $this->getDoctrine()->getManager();
-        $entity = $em->find('CircleBundle\Entity\Product', $id);
-        $em->remove($entity);
-        $em->flush();
-        
-        return new Response();
-    }
-}
-```
-
 #Examples
 
 Need some more examples? Here they are:
@@ -456,7 +296,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
- * @ORM\Table("addresses")
+ * @ORM\Table("addresses") // or "http://www.your-url.com/api/addresses"
  */
 class Address {
 
@@ -568,7 +408,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
- * @ORM\Table("users")
+ * @ORM\Table("users") // or "http://www.your-url.com/api/users"
  */
 class User {
 

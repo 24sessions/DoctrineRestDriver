@@ -18,7 +18,9 @@
 
 namespace Circle\DoctrineRestDriver;
 
-use Circle\DoctrineRestDriver\Annotations\RoutingTable;
+use Circle\DoctrineRestDriver\Factory\RestClientFactory;
+use Circle\DoctrineRestDriver\Types\RestClientOptions;
+use Circle\RestClientBundle\Services\RestClient;
 use Doctrine\DBAL\Driver as DriverInterface;
 use Doctrine\DBAL\Connection as AbstractConnection;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
@@ -39,14 +41,10 @@ class Driver implements DriverInterface {
 
     /**
      * {@inheritdoc}
-     *
-     * @SuppressWarnings("PHPMD.StaticAccess")
      */
     public function connect(array $params, $username = null, $password = null, array $driverOptions = array()) {
-        if (!empty($this->connection)) return $this->connection;
+        $this->connection = empty($this->connection) ? new Connection($params, $this) : $this->connection;
 
-        $metaData         = new MetaData();
-        $this->connection = new Connection($params, $this, new RoutingTable($metaData->getEntityNamespaces()));
         return $this->connection;
     }
 

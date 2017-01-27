@@ -18,28 +18,38 @@
 
 namespace Circle\DoctrineRestDriver\Types;
 
-use Circle\DoctrineRestDriver\Exceptions\Exceptions;
-use Symfony\Component\Config\Definition\Exception\InvalidTypeException;
+use Circle\DoctrineRestDriver\Validation\Assertions;
 
 /**
- * MaybeInt type
+ * UpdatePayload type
  *
  * @author    Tobias Hauck <tobias@circle.ai>
  * @copyright 2015 TeeAge-Beatz UG
  */
-class MaybeInt {
+class UpdatePayload {
 
     /**
-     * Asserts if the given value is a maybe int
+     * Converts the string with format key="value",[key2="value2",]*
+     * into json
      *
-     * @param  mixed  $value
-     * @param  string $varName
-     * @return int|null
-     * @throws InvalidTypeException
+     * @param  array $tokens
+     * @return string
      *
      * @SuppressWarnings("PHPMD.StaticAccess")
      */
-    public static function assert($value, $varName) {
-        return !is_int($value) && $value !== null ? Exceptions::InvalidTypeException('MaybeInt', $varName, $value) : $value;
+    public static function create(array $tokens) {
+        Assertions::assertHashMap('tokens', $tokens);
+
+        $columns = array_map(function($token) {
+            $segments = explode('=', $token['base_expr']);
+            return $segments[0];
+        }, $tokens['SET']);
+
+        $values = array_map(function($token) {
+            $segments = explode('=', $token['base_expr']);
+            return str_replace('"', '', $segments[1]);
+        }, $tokens['SET']);
+
+        return json_encode(array_combine($columns, $values));
     }
 }

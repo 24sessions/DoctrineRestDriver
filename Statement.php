@@ -18,17 +18,18 @@
 
 namespace Circle\DoctrineRestDriver;
 
-use Circle\DoctrineRestDriver\Annotations\RoutingTable;
-use Circle\DoctrineRestDriver\Exceptions\DoctrineRestDriverException;
+use Circle\DoctrineRestDriver\Enums\HttpMethods;
 use Circle\DoctrineRestDriver\Exceptions\Exceptions;
-use Circle\DoctrineRestDriver\Exceptions\RequestFailedException;
+use Circle\DoctrineRestDriver\Factory\RestClientFactory;
+use Circle\DoctrineRestDriver\Factory\ResultSetFactory;
 use Circle\DoctrineRestDriver\Security\AuthStrategy;
 use Circle\DoctrineRestDriver\Transformers\MysqlToRequest;
-use Circle\DoctrineRestDriver\Types\Authentication;
+use Circle\DoctrineRestDriver\Types\Request;
 use Circle\DoctrineRestDriver\Types\Result;
-use Circle\DoctrineRestDriver\Types\SqlQuery;
 use Circle\DoctrineRestDriver\Validation\Assertions;
 use Doctrine\DBAL\Driver\Statement as StatementInterface;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Executes the statement - sends requests to an api
@@ -43,81 +44,72 @@ class Statement implements \IteratorAggregate, StatementInterface {
     /**
      * @var string
      */
-    private $query;
+    protected $query;
 
     /**
      * @var MysqlToRequest
      */
-    private $mysqlToRequest;
+    protected $mysqlToRequest;
 
     /**
      * @var array
      */
-    private $params = [];
+    protected $params = [];
 
     /**
-     * @var RestClient
+     * @var \Circle\DoctrineRestDriver\Factory\RestClientFactory
      */
-    private $restClient;
+    protected $restClientFactory;
 
     /**
      * @var array
      */
-    private $result;
+    protected $result;
 
     /**
      * @var int
      */
-    private $id;
+    protected $id;
 
     /**
      * @var int
      */
-    private $errorCode;
+    protected $errorCode;
 
     /**
      * @var string
      */
-    private $errorMessage;
+    protected $errorMessage;
 
     /**
      * @var int
      */
-    private $fetchMode;
+    protected $fetchMode;
 
     /**
      * @var AuthStrategy
      */
-    private $authStrategy;
-
-    /**
-     * @var RoutingTable
-     */
-    private $routings;
-
-    /**
-     * @var array
-     */
-    private $options;
+    protected $authStrategy;
 
     /**
      * Statement constructor
      *
-     * @param  string       $query
-     * @param  array        $options
-     * @param  RoutingTable $routings
+     * @param  string $query
+     * @param  array  $options
      * @throws \Exception
      *
      * @SuppressWarnings("PHPMD.StaticAccess")
      */
-    public function __construct($query, array $options, RoutingTable $routings) {
-        $this->query          = SqlQuery::quoteUrl($query);
-        $this->routings       = $routings;
-        $this->mysqlToRequest = new MysqlToRequest($options, $this->routings);
-        $this->restClient     = new RestClient();
+    public function __construct($query, array $options) {
+        $this->query             = $query;
+        $this->mysqlToRequest    = new MysqlToRequest($options);
+        $this->restClientFactory = new RestClientFactory();
 
-        $this->authStrategy = Authentication::create($options);
-        $this->options      = $options;
+        $authenticatorClass = !empty($options['driverOptions']['authenticator_class']) ? $options['driverOptions']['authenticator_class'] : 'NoAuthentication';
+        $className          = preg_match('/\\\\/', $authenticatorClass) ? $authenticatorClass : 'Circle\DoctrineRestDriver\Security\\' . $authenticatorClass;
+        Assertions::assertClassExists($className);
+        $this->authStrategy = new $className($options);
+        Assertions::assertAuthStrategy($this->authStrategy);
     }
 
     /**
@@ -153,27 +145,17 @@ class Statement implements \IteratorAggregate, StatementInterface {
 
     /**
      * {@inheritdoc}
-     * @throws RequestFailedException
-     *
-     * @SuppressWarnings("PHPMD.StaticAccess")
      */
     public function execute($params = null) {
-        $query   = SqlQuery::setParams($this->query, $params !== null ? $params : $this->params);
-        $request = $this->authStrategy->transformRequest($this->mysqlToRequest->transform($query));
+        $rawRequest = $this->mysqlToRequest->transform($this->query, $this->params);
+        $request    = $this->authStrategy->transformRequest($rawRequest);
+        $restClient = $this->restClientFactory->createOne($request->getCurlOptions());
 
-        try {
-            $response     = $this->restClient->send($request);
-            $result       = new Result($query, $response, $this->options);
-            $this->result = $result->get();
-            $this->id     = $result->id();
+        $method     = strtolower($request->getMethod());
+        $response   = $method === HttpMethods::GET || $method === HttpMethods::DELETE ? $restClient->$method($request->getUrlAndQuery()) : $restClient->$method($request->getUrlAndQuery(), $request->getPayload());
+        $statusCode = $response->getStatusCode();
 
-            return true;
-        } catch(RequestFailedException $e) {
-            // as the error handling proposed by doctrine
-            // does not work, we use the way of PDO_mysql
-            // which just throws the possible errors
-            throw new DoctrineRestDriverException($e->getMessage(), $e->getCode());
-        }
+        return $statusCode === 200 || ($method === HttpMethods::DELETE && $statusCode === 204) ? $this->onSuccess($response, $method) : $this->onError($request, $response);
     }
 
     /**
@@ -253,5 +235,38 @@ class Statement implements \IteratorAggregate, StatementInterface {
      */
     public function getId() {
         return $this->id;
+    }
+
+    /**
+     * Handles the statement if the execution succeeded
+     *
+     * @param  Response $response
+     * @param  string   $method
+     * @return bool
+     *
+     * @SuppressWarnings("PHPMD.StaticAccess")
+     */
+    protected function onSuccess(Response $response, $method) {
+        $this->result = Result::create($this->query, json_decode($response->getContent(), true));
+        $this->id     = $method === HttpMethods::POST ? $this->result['id'] : null;
+        krsort($this->result);
+
+        return true;
+    }
+
+    /**
+     * Handles the statement if the execution failed
+     *
+     * @param  Request  $request
+     * @param  Response $response
+     * @throws \Exception
+     *
+     * @SuppressWarnings("PHPMD.StaticAccess")
+     */
+    protected function onError(Request $request, Response $response) {
+        $this->errorCode    = $response->getStatusCode();
+        $this->errorMessage = $response->getContent();
+
+        return Exceptions::RequestFailedException($request, $response->getStatusCode(), $response->getContent());
     }
 }

@@ -18,32 +18,37 @@
 
 namespace Circle\DoctrineRestDriver\Types;
 
-use Circle\DoctrineRestDriver\Exceptions\Exceptions;
 use Circle\DoctrineRestDriver\Validation\Assertions;
-use Circle\DoctrineRestDriver\Validation\Exceptions\InvalidTypeException;
 
 /**
- * HashMap type
+ * InsertPayload type
  *
  * @author    Tobias Hauck <tobias@circle.ai>
  * @copyright 2015 TeeAge-Beatz UG
  */
-class HashMap {
+class InsertPayload {
 
     /**
-     * Asserts if the given value is a hash map
+     * Converts the string with format (key) VALUES (value)
+     * into json
      *
-     * @param  mixed  $value
-     * @param  string $varName
-     * @return mixed
-     * @throws InvalidTypeException
+     * @param  array $tokens
+     * @return string
      *
      * @SuppressWarnings("PHPMD.StaticAccess")
      */
-    public static function assert($value, $varName) {
-        if(!is_array($value)) return Exceptions::InvalidTypeException('HashMap', $varName, $value);
-        foreach($value as $key => $v) HashMapEntry::assert([$key => $v], $varName);
+    public static function create(array $tokens) {
+        Assertions::assertHashMap('tokens', $tokens);
 
-        return $value;
+        $columns = array_filter($tokens['INSERT'], function($token) {
+            return $token['expr_type'] === 'column-list';
+        });
+
+        $columns = explode(',', str_replace(['(', ')', ' '], '', end($columns)['base_expr']));
+        $values  = explode(',', str_replace(['(', ')', ' '], '', end($tokens['VALUES'])['base_expr']));
+
+        return json_encode(array_combine($columns, array_map(function($value) {
+            return Value::create($value);
+        }, $values)));
     }
 }

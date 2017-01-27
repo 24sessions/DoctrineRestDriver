@@ -19,15 +19,13 @@
 namespace Circle\DoctrineRestDriver\Types;
 
 use Circle\DoctrineRestDriver\Enums\SqlOperations;
-use Circle\DoctrineRestDriver\Exceptions\Exceptions;
+use Circle\DoctrineRestDriver\Validation\Assertions;
 
 /**
  * Table type
  *
  * @author    Tobias Hauck <tobias@circle.ai>
  * @copyright 2015 TeeAge-Beatz UG
- *
- * @SuppressWarnings("PHPMD.StaticAccess")
  */
 class Table {
 
@@ -36,11 +34,11 @@ class Table {
      *
      * @param  array  $tokens
      * @return string
+     *
+     * @SuppressWarnings("PHPMD.StaticAccess")
      */
     public static function create(array $tokens) {
-        HashMap::assert($tokens, 'tokens');
-
-        if (empty($tokens['FROM']) && empty($tokens['INSERT']) && empty($tokens['UPDATE'])) return Exceptions::InvalidTypeException('array', 'tokens', null);
+        Assertions::assertHashMap('tokens', $tokens);
 
         $operation = SqlOperation::create($tokens);
         if ($operation === SqlOperations::INSERT) return $tokens['INSERT'][1]['no_quotes']['parts'][0];
@@ -53,31 +51,15 @@ class Table {
      *
      * @param  array  $tokens
      * @return null|string
+     *
+     * @SuppressWarnings("PHPMD.StaticAccess")
      */
     public static function alias(array $tokens) {
-        HashMap::assert($tokens, 'tokens');
+        Assertions::assertHashMap('tokens', $tokens);
 
         $operation = SqlOperation::create($tokens);
         if ($operation === SqlOperations::INSERT) return null;
         if ($operation === SqlOperations::UPDATE) return $tokens['UPDATE'][0]['alias']['name'];
         return $tokens['FROM'][0]['alias']['name'];
-    }
-
-    /**
-     * replaces the table in the tokens array with the given table
-     *
-     * @param  array $tokens
-     * @param  array $newTable
-     * @return array
-     */
-    public static function replace(array $tokens, $newTable) {
-        HashMap::assert($tokens, 'tokens');
-
-        $operation = SqlOperation::create($tokens);
-        $firstKey  = $operation === SqlOperations::DELETE || $operation === SqlOperations::SELECT ? 'FROM' : strtoupper($operation);
-
-        $tokens[$firstKey][$operation === SqlOperations::INSERT ? 1 : 0]['no_quotes']['parts'][0] = $newTable;
-
-        return $tokens;
     }
 }

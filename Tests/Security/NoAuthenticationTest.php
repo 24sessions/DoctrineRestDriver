@@ -57,16 +57,8 @@ class NoAuthenticationTest extends \PHPUnit_Framework_TestCase {
     public function transformRequest() {
         $expectedOptions = [];
 
-        $request  = new Request([
-            'method' => HttpMethods::GET,
-            'url'    => 'http://circle.ai'
-        ]);
-
-        $expected = new Request([
-            'method'      => HttpMethods::GET,
-            'url'         => 'http://circle.ai',
-            'curlOptions' => $expectedOptions
-        ]);
+        $request  = new Request(HttpMethods::GET, 'http://circle.ai', []);
+        $expected = new Request(HttpMethods::GET, 'http://circle.ai', $expectedOptions);
 
         $this->assertEquals($expected, $this->authentication->transformRequest($request));
     }

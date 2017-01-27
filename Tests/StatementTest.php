@@ -39,12 +39,6 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
      * {@inheritdoc}
      */
     public function setUp() {
-        $routings = $this->getMockBuilder('Circle\DoctrineRestDriver\Annotations\RoutingTable')->disableOriginalConstructor()->getMock();
-        $routings
-            ->expects($this->any())
-            ->method('get')
-            ->will($this->returnValue(null));
-
         $params = [
             'host'          => 'http://www.circle.ai',
             'user'          => 'Aladdin',
@@ -53,7 +47,7 @@ class StatementTest extends \PHPUnit_Framework_TestCase {
                 'authenticator_class' => 'HttpAuthentication'
             ]
         ];
-        $this->statement = new Statement('SELECT name FROM product WHERE id=1', $params, $routings);
+        $this->statement = new Statement('SELECT name FROM product WHERE id=1', $params);
     }
 
     /**

@@ -26,7 +26,7 @@ namespace Circle\DoctrineRestDriver\Exceptions;
  *
  * @SuppressWarnings("PHPMD.StaticAccess")
  */
-class InvalidAuthStrategyException extends DoctrineRestDriverException {
+class InvalidAuthStrategyException extends \Exception {
 
     /**
      * InvalidAuthStrategyException constructor

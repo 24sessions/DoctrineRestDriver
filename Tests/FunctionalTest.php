@@ -45,6 +45,14 @@ class FunctionalTest extends WebTestCase {
      * {@inheritdoc}
      */
     public function setUp() {
+        AnnotationRegistry::registerFile(__DIR__ . '/../vendor/doctrine/orm/lib/Doctrine/ORM/Mapping/Entity.php');
+        AnnotationRegistry::registerFile(__DIR__ . '/../vendor/doctrine/orm/lib/Doctrine/ORM/Mapping/Table.php');
+        AnnotationRegistry::registerFile(__DIR__ . '/../vendor/doctrine/orm/lib/Doctrine/ORM/Mapping/Column.php');
+        AnnotationRegistry::registerFile(__DIR__ . '/../vendor/doctrine/orm/lib/Doctrine/ORM/Mapping/Id.php');
+        AnnotationRegistry::registerFile(__DIR__ . '/../vendor/doctrine/orm/lib/Doctrine/ORM/Mapping/GeneratedValue.php');
+        AnnotationRegistry::registerFile(__DIR__ . '/../vendor/doctrine/orm/lib/Doctrine/ORM/Mapping/OneToMany.php');
+        AnnotationRegistry::registerFile(__DIR__ . '/../vendor/doctrine/orm/lib/Doctrine/ORM/Mapping/ManyToOne.php');
+
         static::bootKernel();
         $this->em = static::$kernel->getContainer()->get('doctrine.orm.default_entity_manager');
     }
@@ -56,7 +64,6 @@ class FunctionalTest extends WebTestCase {
      * @covers Circle\DoctrineRestDriver\Connection
      * @covers Circle\DoctrineRestDriver\Statement
      * @covers Circle\DoctrineRestDriver\Statement::<private>
-     * @covers Circle\DoctrineRestDriver\MetaData
      */
     public function find() {
         $entity = $this->em->find('Circle\DoctrineRestDriver\Tests\Entity\TestEntity', 1);
@@ -72,7 +79,6 @@ class FunctionalTest extends WebTestCase {
      * @covers Circle\DoctrineRestDriver\Connection
      * @covers Circle\DoctrineRestDriver\Statement
      * @covers Circle\DoctrineRestDriver\Statement::<private>
-     * @covers Circle\DoctrineRestDriver\MetaData
      * @expectedException \Exception
      */
     public function findNonExisting() {
@@ -86,7 +92,6 @@ class FunctionalTest extends WebTestCase {
      * @covers Circle\DoctrineRestDriver\Connection
      * @covers Circle\DoctrineRestDriver\Statement
      * @covers Circle\DoctrineRestDriver\Statement::<private>
-     * @covers Circle\DoctrineRestDriver\MetaData
      */
     public function findOneBy() {
         $entity = $this->em->getRepository('Circle\DoctrineRestDriver\Tests\Entity\TestEntity')->findOneBy(['id' => 1]);
@@ -102,7 +107,6 @@ class FunctionalTest extends WebTestCase {
      * @covers Circle\DoctrineRestDriver\Connection
      * @covers Circle\DoctrineRestDriver\Statement
      * @covers Circle\DoctrineRestDriver\Statement::<private>
-     * @covers Circle\DoctrineRestDriver\MetaData
      */
     public function findBy() {
         $entity = $this->em->getRepository('Circle\DoctrineRestDriver\Tests\Entity\TestEntity')->findBy(['id' => 1]);
@@ -119,7 +123,6 @@ class FunctionalTest extends WebTestCase {
      * @covers Circle\DoctrineRestDriver\Connection
      * @covers Circle\DoctrineRestDriver\Statement
      * @covers Circle\DoctrineRestDriver\Statement::<private>
-     * @covers Circle\DoctrineRestDriver\MetaData
      */
     public function findAll() {
         $entity = $this->em->getRepository('Circle\DoctrineRestDriver\Tests\Entity\TestEntity')->findAll();
@@ -141,7 +144,6 @@ class FunctionalTest extends WebTestCase {
      * @covers Circle\DoctrineRestDriver\Connection
      * @covers Circle\DoctrineRestDriver\Statement
      * @covers Circle\DoctrineRestDriver\Statement::<private>
-     * @covers Circle\DoctrineRestDriver\MetaData
      */
     public function persistAndFlush() {
         $entity = new TestEntity();
@@ -168,7 +170,6 @@ class FunctionalTest extends WebTestCase {
      * @covers Circle\DoctrineRestDriver\Connection
      * @covers Circle\DoctrineRestDriver\Statement
      * @covers Circle\DoctrineRestDriver\Statement::<private>
-     * @covers Circle\DoctrineRestDriver\MetaData
      */
     public function updateAndFlush() {
         $entity = $this->em->find('Circle\DoctrineRestDriver\Tests\Entity\TestEntity', 1);
@@ -187,7 +188,6 @@ class FunctionalTest extends WebTestCase {
      * @covers Circle\DoctrineRestDriver\Connection
      * @covers Circle\DoctrineRestDriver\Statement
      * @covers Circle\DoctrineRestDriver\Statement::<private>
-     * @covers Circle\DoctrineRestDriver\MetaData
      */
     public function remove() {
         $entity = $this->em->find('Circle\DoctrineRestDriver\Tests\Entity\TestEntity', 1);
@@ -202,7 +202,6 @@ class FunctionalTest extends WebTestCase {
      * @covers Circle\DoctrineRestDriver\Connection
      * @covers Circle\DoctrineRestDriver\Statement
      * @covers Circle\DoctrineRestDriver\Statement::<private>
-     * @covers Circle\DoctrineRestDriver\MetaData
      */
     public function dql() {
         $entity = $this->em
@@ -221,7 +220,6 @@ class FunctionalTest extends WebTestCase {
      * @covers Circle\DoctrineRestDriver\Connection
      * @covers Circle\DoctrineRestDriver\Statement
      * @covers Circle\DoctrineRestDriver\Statement::<private>
-     * @covers Circle\DoctrineRestDriver\MetaData
      */
     public function nativeQuery() {
         $mapping = new ResultSetMapping();
@@ -246,7 +244,6 @@ class FunctionalTest extends WebTestCase {
      * @covers Circle\DoctrineRestDriver\Connection
      * @covers Circle\DoctrineRestDriver\Statement
      * @covers Circle\DoctrineRestDriver\Statement::<private>
-     * @covers Circle\DoctrineRestDriver\MetaData
      */
     public function dqlWithOrderBy() {
         $entity = $this->em
@@ -269,7 +266,6 @@ class FunctionalTest extends WebTestCase {
      * @covers Circle\DoctrineRestDriver\Connection
      * @covers Circle\DoctrineRestDriver\Statement
      * @covers Circle\DoctrineRestDriver\Statement::<private>
-     * @covers Circle\DoctrineRestDriver\MetaData
      */
     public function dqlWithObjectParameter() {
         $entity = $this->em
@@ -287,7 +283,6 @@ class FunctionalTest extends WebTestCase {
      * @covers Circle\DoctrineRestDriver\Connection
      * @covers Circle\DoctrineRestDriver\Statement
      * @covers Circle\DoctrineRestDriver\Statement::<private>
-     * @covers Circle\DoctrineRestDriver\MetaData
      * @expectedException \Exception
      */
     public function nonImplementedEntity() {

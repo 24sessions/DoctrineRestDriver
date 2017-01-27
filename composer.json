@@ -15,38 +15,31 @@
     "GPL"
   ],
   "require-dev": {
+    "symfony/yaml": "^3.0",
+    "sensio/framework-extra-bundle": "^3.0",
+    "symfony/framework-bundle": "^3.0",
     "symfony/expression-language": "^3.0",
-    "phpmd/phpmd" : "@stable",
-    "phpunit/phpunit" : "@stable",
-    "symfony/yaml": "3.*",
-    "sensio/framework-extra-bundle": "3.*",
-    "symfony/framework-bundle": "3.*",
     "doctrine/doctrine-bundle": "^1.6",
-    "symfony/validator": "3.*"
+    "symfony/validator": "^3.0",
+    "phpmd/phpmd" : "@stable",
+    "phpunit/phpunit" : "@stable"
   },
   "autoload": {
     "psr-0": {
       "24sessions\\DoctrineRestDriver": ""
-    },
-    "files": [
-      "Annotations/Delete.php",
-      "Annotations/Fetch.php",
-      "Annotations/Insert.php",
-      "Annotations/Select.php",
-      "Annotations/Update.php"
-    ]
+    }
   },
   "target-dir": "24sessions/DoctrineRestDriver",
   "extra": {
     "branch-alias": {
-      "dev-master": "1.0-dev"
+      "dev-master": "0.2-dev"
     }
   },
   "require": {
     "php": ">=5.5",
-    "doctrine/dbal": "2.*",
+    "doctrine/doctrine-bundle": "^1.6",
     "greenlion/php-sql-parser": "^4.0",
-    "doctrine/orm": "2.*",
-    "ci/restclientbundle": "^1.0"
+    "ci/restclientbundle": "^1.0",
+    "circle/doctrine-rest-driver": "^2.2"
   }
 }

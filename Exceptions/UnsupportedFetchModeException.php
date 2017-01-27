@@ -27,7 +27,7 @@ namespace Circle\DoctrineRestDriver\Exceptions;
  *
  * @SuppressWarnings("PHPMD.StaticAccess")
  */
-class UnsupportedFetchModeException extends DoctrineRestDriverException {
+class UnsupportedFetchModeException extends \Exception {
 
     /**
      * UnsupportedFetchMode constructor

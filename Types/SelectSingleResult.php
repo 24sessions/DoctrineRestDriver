@@ -37,7 +37,6 @@ class SelectSingleResult {
      * @SuppressWarnings("PHPMD.StaticAccess")
      */
     public static function create(array $tokens, $content) {
-        HashMap::assert($tokens, 'tokens');
         $tableAlias = Table::alias($tokens);
 
         $attributeValueMap = array_map(function($token) use ($content, $tableAlias) {

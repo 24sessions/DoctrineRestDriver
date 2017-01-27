@@ -18,6 +18,9 @@
 
 namespace Circle\DoctrineRestDriver\Types;
 
+use Circle\DoctrineRestDriver\Enums\SqlOperations;
+use Circle\DoctrineRestDriver\Validation\Assertions;
+
 /**
  * Handles creation of pagination related http headers
  *
@@ -35,7 +38,7 @@ class PaginationHeaders {
      * @SuppressWarnings("PHPMD.StaticAccess")
      */
     public static function create(array $tokens) {
-        HashMap::assert($tokens, 'tokens');
+        Assertions::assertHashMap('tokens', $tokens);
 
         if (empty($tokens['LIMIT'])) return [];
 
