@@ -1,45 +1,34 @@
 {
-  "name": "24sessions/doctrine-rest-driver",
-  "description": "Use a REST API as if it was your local database",
-  "type": "library",
-  "authors": [
-    {
-      "name": "24sessions",
-      "email": "support@24sessions.com"
-    }
-  ],
-  "keywords": [
-    "REST API doctrine ORM DBAL driver"
-  ],
-  "license": [
-    "GPL"
-  ],
-  "require-dev": {
-    "symfony/yaml": "^3.0",
-    "sensio/framework-extra-bundle": "^3.0",
-    "symfony/framework-bundle": "^3.0",
-    "symfony/expression-language": "^3.0",
-    "doctrine/doctrine-bundle": "^1.6",
-    "symfony/validator": "^3.0",
-    "phpmd/phpmd" : "@stable",
-    "phpunit/phpunit" : "@stable"
-  },
-  "autoload": {
-    "psr-0": {
-      "24sessions\\DoctrineRestDriver": ""
-    }
-  },
-  "target-dir": "24sessions/DoctrineRestDriver",
-  "extra": {
-    "branch-alias": {
-      "dev-master": "1.0"
-    }
-  },
-  "require": {
-    "php": ">=5.5",
-    "doctrine/doctrine-bundle": "^1.6",
-    "greenlion/php-sql-parser": "^4.0",
-    "ci/restclientbundle": "^1.0",
-    "league/oauth2-client": "^1.0|^2.0"
-  }
+    "name": "24sessions/doctrine-rest-driver",
+    "description": "Use a REST API as if it was your local database",
+    "type": "library",
+    "version": "1.0",
+    "authors": [
+        {
+            "name": "24sessions",
+            "email": "support@24sessions.com"
+        }
+    ],
+    "license": "GPL",
+    "keywords": [
+        "REST API doctrine ORM DBAL driver"
+    ],
+    "require": {
+        "php": ">=5.5",
+        "doctrine/doctrine-bundle": "^1.6",
+        "greenlion/php-sql-parser": "^4.0",
+        "ci/restclientbundle": "^1.0",
+        "league/oauth2-client": "^1.0|^2.0"
+    },
+    "require-dev": {
+        "symfony/yaml": "^3.0",
+        "sensio/framework-extra-bundle": "^3.0",
+        "symfony/framework-bundle": "^3.0",
+        "symfony/expression-language": "^3.0",
+        "doctrine/doctrine-bundle": "^1.6",
+        "symfony/validator": "^3.0",
+        "phpmd/phpmd" : "@stable",
+        "phpunit/phpunit" : "@stable"
+    },
+    "minimum-stability": "dev"
 }
