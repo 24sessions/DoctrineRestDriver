@@ -31,5 +31,11 @@
         "phpmd/phpmd" : "@stable",
         "phpunit/phpunit" : "@stable"
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-0": {
+            "24sessions\\DoctrineRestDriver": ""
+        }
+    },
+    "target-dir": "24sessions/DoctrineRestDriver"
 }

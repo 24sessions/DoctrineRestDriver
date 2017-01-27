@@ -5,7 +5,7 @@ namespace Circle\DoctrineRestDriver\Security;
 use Circle\DoctrineRestDriver\Types\Request;
 use League\OAuth2\Client\Token\AccessToken;
 
-class DataApiAuthentication implements AuthStrategy {
+class OAuth2Authentication implements AuthStrategy {
 
     /**
      * @var array
