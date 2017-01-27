@@ -1,11 +1,11 @@
 {
-  "name": "circle/doctrine-rest-driver",
+  "name": "24sessions/doctrine-rest-driver",
   "description": "Use a REST API as if it was your local database",
   "type": "library",
   "authors": [
     {
-      "name": "Circle",
-      "email": "hi@circle.ai"
+      "name": "24sessions",
+      "email": "support@24sessions.com"
     }
   ],
   "keywords": [
@@ -26,7 +26,7 @@
   },
   "autoload": {
     "psr-0": {
-      "Circle\\DoctrineRestDriver": ""
+      "24sessions\\DoctrineRestDriver": ""
     },
     "files": [
       "Annotations/Delete.php",
@@ -36,7 +36,7 @@
       "Annotations/Update.php"
     ]
   },
-  "target-dir": "Circle/DoctrineRestDriver",
+  "target-dir": "24sessions/DoctrineRestDriver",
   "extra": {
     "branch-alias": {
       "dev-master": "1.0-dev"
