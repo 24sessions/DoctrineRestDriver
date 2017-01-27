@@ -44,21 +44,8 @@
   },
   "repositories": [
     {
-      "type": "package",
-      "package": {
-        "name": "24sessions/doctrine-rest-driver",
-        "version": "dev-master",
-        "source": {
-          "url": "git@github.com:24sessions/DoctrineRestDriver.git",
-          "type": "git",
-          "reference": "master"
-        },
-        "autoload": {
-          "psr-0": {
-            "24sessions\\DoctrineRestDriver": ""
-          }
-        }
-      }
+      "type": "vcs",
+      "url": "https://github.com/24sessions/DoctrineRestDriver.git"
     }
   ]
 }
