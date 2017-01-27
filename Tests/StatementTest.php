@@ -16,9 +16,9 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Tests;
+namespace DoctrineRestDriver\Tests;
 
-use Circle\DoctrineRestDriver\Statement;
+use DoctrineRestDriver\Statement;
 
 /**
  * Tests the statement
@@ -26,7 +26,7 @@ use Circle\DoctrineRestDriver\Statement;
  * @author    Tobias Hauck <tobias@circle.ai>
  * @copyright 2015 TeeAge-Beatz UG
  *
- * @coversDefaultClass Circle\DoctrineRestDriver\Statement
+ * @coversDefaultClass DoctrineRestDriver\Statement
  */
 class StatementTest extends \PHPUnit_Framework_TestCase {
 

@@ -16,11 +16,11 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Tests\Security;
+namespace DoctrineRestDriver\Tests\Security;
 
-use Circle\DoctrineRestDriver\Enums\HttpMethods;
-use Circle\DoctrineRestDriver\Security\HttpAuthentication;
-use Circle\DoctrineRestDriver\Types\Request;
+use DoctrineRestDriver\Enums\HttpMethods;
+use DoctrineRestDriver\Security\HttpAuthentication;
+use DoctrineRestDriver\Types\Request;
 
 /**
  * Tests the result mapping
@@ -28,7 +28,7 @@ use Circle\DoctrineRestDriver\Types\Request;
  * @author    Tobias Hauck <tobias@circle.ai>
  * @copyright 2015 TeeAge-Beatz UG
  *
- * @coversDefaultClass Circle\DoctrineRestDriver\Security\HttpAuthentication
+ * @coversDefaultClass DoctrineRestDriver\Security\HttpAuthentication
  */
 class HttpAuthenticationTest extends \PHPUnit_Framework_TestCase {
 

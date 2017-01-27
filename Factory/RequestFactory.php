@@ -16,18 +16,18 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Factory;
+namespace DoctrineRestDriver\Factory;
 
-use Circle\DoctrineRestDriver\Enums\HttpMethods;
-use Circle\DoctrineRestDriver\Types\HttpHeader;
-use Circle\DoctrineRestDriver\Types\CurlOptions;
-use Circle\DoctrineRestDriver\Types\Payload;
-use Circle\DoctrineRestDriver\Types\HttpQuery;
-use Circle\DoctrineRestDriver\Types\LimitHttpHeader;
-use Circle\DoctrineRestDriver\Types\OrderHttpHeader;
-use Circle\DoctrineRestDriver\Types\Request;
-use Circle\DoctrineRestDriver\Types\SqlOperation;
-use Circle\DoctrineRestDriver\Types\Url;
+use DoctrineRestDriver\Enums\HttpMethods;
+use DoctrineRestDriver\Types\HttpHeader;
+use DoctrineRestDriver\Types\CurlOptions;
+use DoctrineRestDriver\Types\Payload;
+use DoctrineRestDriver\Types\HttpQuery;
+use DoctrineRestDriver\Types\LimitHttpHeader;
+use DoctrineRestDriver\Types\OrderHttpHeader;
+use DoctrineRestDriver\Types\Request;
+use DoctrineRestDriver\Types\SqlOperation;
+use DoctrineRestDriver\Types\Url;
 
 /**
  * Factory for requests

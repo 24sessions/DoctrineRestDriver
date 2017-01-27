@@ -16,10 +16,10 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Tests\Types;
+namespace DoctrineRestDriver\Tests\Types;
 
-use Circle\DoctrineRestDriver\Types\Request;
-use Circle\DoctrineRestDriver\Types\RestClientOptions;
+use DoctrineRestDriver\Types\Request;
+use DoctrineRestDriver\Types\RestClientOptions;
 
 /**
  * Tests the request type
@@ -27,7 +27,7 @@ use Circle\DoctrineRestDriver\Types\RestClientOptions;
  * @author    Tobias Hauck <tobias@circle.ai>
  * @copyright 2015 TeeAge-Beatz UG
  *
- * @coversDefaultClass Circle\DoctrineRestDriver\Types\Request
+ * @coversDefaultClass DoctrineRestDriver\Types\Request
  */
 class RequestTest extends \PHPUnit_Framework_TestCase {
 

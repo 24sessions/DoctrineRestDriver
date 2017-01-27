@@ -16,10 +16,10 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Tests\Types;
+namespace DoctrineRestDriver\Tests\Types;
 
-use Circle\DoctrineRestDriver\Types\SelectAllResult;
-use Circle\DoctrineRestDriver\Types\SelectSingleResult;
+use DoctrineRestDriver\Types\SelectAllResult;
+use DoctrineRestDriver\Types\SelectSingleResult;
 use PHPSQLParser\PHPSQLParser;
 
 /**
@@ -28,7 +28,7 @@ use PHPSQLParser\PHPSQLParser;
  * @author    Tobias Hauck <tobias@circle.ai>
  * @copyright 2015 TeeAge-Beatz UG
  *
- * @coversDefaultClass Circle\DoctrineRestDriver\Types\SelectAllResult
+ * @coversDefaultClass DoctrineRestDriver\Types\SelectAllResult
  */
 class SelectAllResultTest extends \PHPUnit_Framework_TestCase {
 

@@ -16,11 +16,11 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Tests\Security;
+namespace DoctrineRestDriver\Tests\Security;
 
-use Circle\DoctrineRestDriver\Enums\HttpMethods;
-use Circle\DoctrineRestDriver\Security\NoAuthentication;
-use Circle\DoctrineRestDriver\Types\Request;
+use DoctrineRestDriver\Enums\HttpMethods;
+use DoctrineRestDriver\Security\NoAuthentication;
+use DoctrineRestDriver\Types\Request;
 
 /**
  * Tests the result mapping
@@ -28,7 +28,7 @@ use Circle\DoctrineRestDriver\Types\Request;
  * @author    Tobias Hauck <tobias@circle.ai>
  * @copyright 2015 TeeAge-Beatz UG
  *
- * @coversDefaultClass Circle\DoctrineRestDriver\Security\NoAuthentication
+ * @coversDefaultClass DoctrineRestDriver\Security\NoAuthentication
  */
 class NoAuthenticationTest extends \PHPUnit_Framework_TestCase {
 

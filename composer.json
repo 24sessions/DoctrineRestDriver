@@ -34,7 +34,7 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-0": {
-            "24sessions\\DoctrineRestDriver": ""
+            "DoctrineRestDriver": ""
         }
     },
     "target-dir": "24sessions/DoctrineRestDriver"

@@ -16,9 +16,9 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Tests\Types;
+namespace DoctrineRestDriver\Tests\Types;
 
-use Circle\DoctrineRestDriver\Types\Result;
+use DoctrineRestDriver\Types\Result;
 
 /**
  * Tests the result type
@@ -26,7 +26,7 @@ use Circle\DoctrineRestDriver\Types\Result;
  * @author    Tobias Hauck <tobias@circle.ai>
  * @copyright 2015 TeeAge-Beatz UG
  *
- * @coversDefaultClass Circle\DoctrineRestDriver\Types\Result
+ * @coversDefaultClass DoctrineRestDriver\Types\Result
  */
 class ResultTest extends \PHPUnit_Framework_TestCase {
 

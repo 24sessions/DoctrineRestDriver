@@ -16,9 +16,9 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Enums;
-use Circle\DoctrineRestDriver\Exceptions\Exceptions;
-use Circle\DoctrineRestDriver\Exceptions\InvalidSqlOperationException;
+namespace DoctrineRestDriver\Enums;
+use DoctrineRestDriver\Exceptions\Exceptions;
+use DoctrineRestDriver\Exceptions\InvalidSqlOperationException;
 
 /**
  * Contains all available http methods of the driver

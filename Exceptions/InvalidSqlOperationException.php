@@ -16,7 +16,7 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Exceptions;
+namespace DoctrineRestDriver\Exceptions;
 
 /**
  * Exception class for invalid sql operations

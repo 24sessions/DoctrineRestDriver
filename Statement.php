@@ -16,17 +16,17 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver;
+namespace DoctrineRestDriver;
 
-use Circle\DoctrineRestDriver\Enums\HttpMethods;
-use Circle\DoctrineRestDriver\Exceptions\Exceptions;
-use Circle\DoctrineRestDriver\Factory\RestClientFactory;
-use Circle\DoctrineRestDriver\Factory\ResultSetFactory;
-use Circle\DoctrineRestDriver\Security\AuthStrategy;
-use Circle\DoctrineRestDriver\Transformers\MysqlToRequest;
-use Circle\DoctrineRestDriver\Types\Request;
-use Circle\DoctrineRestDriver\Types\Result;
-use Circle\DoctrineRestDriver\Validation\Assertions;
+use DoctrineRestDriver\Enums\HttpMethods;
+use DoctrineRestDriver\Exceptions\Exceptions;
+use DoctrineRestDriver\Factory\RestClientFactory;
+use DoctrineRestDriver\Factory\ResultSetFactory;
+use DoctrineRestDriver\Security\AuthStrategy;
+use DoctrineRestDriver\Transformers\MysqlToRequest;
+use DoctrineRestDriver\Types\Request;
+use DoctrineRestDriver\Types\Result;
+use DoctrineRestDriver\Validation\Assertions;
 use Doctrine\DBAL\Driver\Statement as StatementInterface;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,7 +57,7 @@ class Statement implements \IteratorAggregate, StatementInterface {
     protected $params = [];
 
     /**
-     * @var \Circle\DoctrineRestDriver\Factory\RestClientFactory
+     * @var \DoctrineRestDriver\Factory\RestClientFactory
      */
     protected $restClientFactory;
 
@@ -106,7 +106,7 @@ class Statement implements \IteratorAggregate, StatementInterface {
         $this->restClientFactory = new RestClientFactory();
 
         $authenticatorClass = !empty($options['driverOptions']['authenticator_class']) ? $options['driverOptions']['authenticator_class'] : 'NoAuthentication';
-        $className          = preg_match('/\\\\/', $authenticatorClass) ? $authenticatorClass : 'Circle\DoctrineRestDriver\Security\\' . $authenticatorClass;
+        $className          = preg_match('/\\\\/', $authenticatorClass) ? $authenticatorClass : 'DoctrineRestDriver\Security\\' . $authenticatorClass;
         Assertions::assertClassExists($className);
         $this->authStrategy = new $className($options);
         Assertions::assertAuthStrategy($this->authStrategy);

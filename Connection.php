@@ -16,10 +16,10 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver;
+namespace DoctrineRestDriver;
 
 use Doctrine\DBAL\Connection as AbstractConnection;
-use Circle\DoctrineRestDriver\Validation\Assertions;
+use DoctrineRestDriver\Validation\Assertions;
 
 /**
  * Doctrine connection for the rest driver
@@ -48,7 +48,7 @@ class Connection extends AbstractConnection {
         parent::__construct($params, $driver);
 
         $statementClass = !empty($params['driverOptions']['statement_class']) ? $params['driverOptions']['statement_class'] : 'Statement';
-        $className = preg_match('/\\\\/', $statementClass) ? $statementClass : 'Circle\DoctrineRestDriver\\' . $statementClass;
+        $className = preg_match('/\\\\/', $statementClass) ? $statementClass : 'DoctrineRestDriver\\' . $statementClass;
         Assertions::assertClassExists($className);
         $this->statementClass = $className;
     }

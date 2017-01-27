@@ -16,10 +16,10 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Tests\Factory;
+namespace DoctrineRestDriver\Tests\Factory;
 
-use Circle\DoctrineRestDriver\Factory\RequestFactory;
-use Circle\DoctrineRestDriver\Types\Request;
+use DoctrineRestDriver\Factory\RequestFactory;
+use DoctrineRestDriver\Types\Request;
 use PHPSQLParser\PHPSQLParser;
 
 /**
@@ -28,7 +28,7 @@ use PHPSQLParser\PHPSQLParser;
  * @author    Tobias Hauck <tobias@circle.ai>
  * @copyright 2015 TeeAge-Beatz UG
  *
- * @coversDefaultClass Circle\DoctrineRestDriver\Factory\RequestFactory
+ * @coversDefaultClass DoctrineRestDriver\Factory\RequestFactory
  */
 class RequestFactoryTest extends \PHPUnit_Framework_TestCase {
 

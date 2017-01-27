@@ -16,7 +16,7 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Tests\Entity;
+namespace DoctrineRestDriver\Tests\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -53,7 +53,7 @@ class TestEntity {
     protected $value;
 
     /**
-     * @ORM\OneToMany(targetEntity="Circle\DoctrineRestDriver\Tests\Entity\AssociatedEntity", mappedBy="product")
+     * @ORM\OneToMany(targetEntity="DoctrineRestDriver\Tests\Entity\AssociatedEntity", mappedBy="product")
      * @var ArrayCollection
      */
     protected $categories;

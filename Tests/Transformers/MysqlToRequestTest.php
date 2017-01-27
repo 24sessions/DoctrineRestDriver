@@ -16,11 +16,11 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Tests\Transformers;
+namespace DoctrineRestDriver\Tests\Transformers;
 
-use Circle\DoctrineRestDriver\Transformers\MysqlToRequest;
-use Circle\DoctrineRestDriver\Types\CurlOptions;
-use Circle\DoctrineRestDriver\Types\Request;
+use DoctrineRestDriver\Transformers\MysqlToRequest;
+use DoctrineRestDriver\Types\CurlOptions;
+use DoctrineRestDriver\Types\Request;
 
 /**
  * Tests the mysql to request transformer
@@ -28,7 +28,7 @@ use Circle\DoctrineRestDriver\Types\Request;
  * @author    Tobias Hauck <tobias@circle.ai>
  * @copyright 2015 TeeAge-Beatz UG
  *
- * @coversDefaultClass Circle\DoctrineRestDriver\Transformers\MysqlToRequest
+ * @coversDefaultClass DoctrineRestDriver\Transformers\MysqlToRequest
  */
 class MysqlToRequestTest extends \PHPUnit_Framework_TestCase {
 

@@ -16,9 +16,9 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Types;
+namespace DoctrineRestDriver\Types;
 
-use Circle\DoctrineRestDriver\Validation\Assertions;
+use DoctrineRestDriver\Validation\Assertions;
 
 /**
  * Converts a given options set into a valid array

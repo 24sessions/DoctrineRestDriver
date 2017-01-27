@@ -16,7 +16,7 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Types;
+namespace DoctrineRestDriver\Types;
 
 /**
  * Adds query related headers to the CURLOPT_HTTPHEADER

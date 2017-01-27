@@ -16,9 +16,9 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Tests\Types;
+namespace DoctrineRestDriver\Tests\Types;
 
-use Circle\DoctrineRestDriver\Types\HttpHeader;
+use DoctrineRestDriver\Types\HttpHeader;
 use PHPSQLParser\PHPSQLParser;
 /**
  * Tests the http header
@@ -26,7 +26,7 @@ use PHPSQLParser\PHPSQLParser;
  * @author    Djane Rey Mabelin <thedjaney@gmail.com>
  * @copyright 2016
  *
- * @coversDefaultClass Circle\DoctrineRestDriver\Types\HttpHeader
+ * @coversDefaultClass DoctrineRestDriver\Types\HttpHeader
  */
 class HttpHeaderTest extends \PHPUnit_Framework_TestCase {
 

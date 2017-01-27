@@ -16,11 +16,11 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Transformers;
+namespace DoctrineRestDriver\Transformers;
 
-use Circle\DoctrineRestDriver\Factory\RequestFactory;
-use Circle\DoctrineRestDriver\Types\Request;
-use Circle\DoctrineRestDriver\Validation\Assertions;
+use DoctrineRestDriver\Factory\RequestFactory;
+use DoctrineRestDriver\Types\Request;
+use DoctrineRestDriver\Validation\Assertions;
 use PHPSQLParser\PHPSQLParser;
 
 /**

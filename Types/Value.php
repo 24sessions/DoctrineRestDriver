@@ -16,10 +16,10 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Types;
+namespace DoctrineRestDriver\Types;
 
-use Circle\DoctrineRestDriver\Validation\Assertions;
-use Circle\DoctrineRestDriver\Validation\Exceptions\InvalidTypeException;
+use DoctrineRestDriver\Validation\Assertions;
+use DoctrineRestDriver\Validation\Exceptions\InvalidTypeException;
 
 /**
  * Value type

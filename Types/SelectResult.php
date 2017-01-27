@@ -16,7 +16,7 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Types;
+namespace DoctrineRestDriver\Types;
 
 /**
  * Maps the response content of a GET query to a valid

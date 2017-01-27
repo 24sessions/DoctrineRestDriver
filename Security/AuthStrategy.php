@@ -16,9 +16,9 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Security;
+namespace DoctrineRestDriver\Security;
 
-use Circle\DoctrineRestDriver\Types\Request;
+use DoctrineRestDriver\Types\Request;
 
 /**
  * Interface for authentication strategies

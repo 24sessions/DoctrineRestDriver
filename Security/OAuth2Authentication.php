@@ -1,8 +1,8 @@
 <?php
 
-namespace Circle\DoctrineRestDriver\Security;
+namespace DoctrineRestDriver\Security;
 
-use Circle\DoctrineRestDriver\Types\Request;
+use DoctrineRestDriver\Types\Request;
 use League\OAuth2\Client\Token\AccessToken;
 
 class OAuth2Authentication implements AuthStrategy {

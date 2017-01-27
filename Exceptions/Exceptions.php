@@ -16,11 +16,11 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Exceptions;
+namespace DoctrineRestDriver\Exceptions;
 
-use Circle\DoctrineRestDriver\Types\Request;
-use Circle\DoctrineRestDriver\Validation\Exceptions\InvalidTypeException;
-use Circle\DoctrineRestDriver\Validation\Exceptions\NotNilException;
+use DoctrineRestDriver\Types\Request;
+use DoctrineRestDriver\Validation\Exceptions\InvalidTypeException;
+use DoctrineRestDriver\Validation\Exceptions\NotNilException;
 
 /**
  * This trait contains methods to throw exceptions

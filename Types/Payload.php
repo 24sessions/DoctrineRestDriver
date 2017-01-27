@@ -16,10 +16,10 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Types;
+namespace DoctrineRestDriver\Types;
 
-use Circle\DoctrineRestDriver\Enums\SqlOperations;
-use Circle\DoctrineRestDriver\Validation\Assertions;
+use DoctrineRestDriver\Enums\SqlOperations;
+use DoctrineRestDriver\Validation\Assertions;
 
 /**
  * Payload type: Union type for UpdatePayload and InsertPayload

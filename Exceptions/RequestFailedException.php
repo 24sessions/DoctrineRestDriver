@@ -16,9 +16,9 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Exceptions;
+namespace DoctrineRestDriver\Exceptions;
 
-use Circle\DoctrineRestDriver\Types\Request;
+use DoctrineRestDriver\Types\Request;
 
 /**
  * Exception class for failed requests

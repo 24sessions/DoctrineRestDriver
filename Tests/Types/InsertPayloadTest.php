@@ -16,10 +16,10 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Tests\Types;
+namespace DoctrineRestDriver\Tests\Types;
 
-use Circle\DoctrineRestDriver\Types\Id;
-use Circle\DoctrineRestDriver\Types\InsertPayload;
+use DoctrineRestDriver\Types\Id;
+use DoctrineRestDriver\Types\InsertPayload;
 use PHPSQLParser\PHPSQLParser;
 
 /**
@@ -28,7 +28,7 @@ use PHPSQLParser\PHPSQLParser;
  * @author    Tobias Hauck <tobias@circle.ai>
  * @copyright 2015 TeeAge-Beatz UG
  *
- * @coversDefaultClass Circle\DoctrineRestDriver\Types\InsertPayload
+ * @coversDefaultClass DoctrineRestDriver\Types\InsertPayload
  */
 class InsertPayloadTest extends \PHPUnit_Framework_TestCase {
 

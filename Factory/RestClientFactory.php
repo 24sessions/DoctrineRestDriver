@@ -16,12 +16,12 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Factory;
+namespace DoctrineRestDriver\Factory;
 
-use Circle\DoctrineRestDriver\Types\RestClientOptions;
-use Circle\RestClientBundle\Services\Curl;
-use Circle\RestClientBundle\Services\CurlOptionsHandler;
-use Circle\RestClientBundle\Services\RestClient;
+use DoctrineRestDriver\Types\RestClientOptions;
+use RestClientBundle\Services\Curl;
+use RestClientBundle\Services\CurlOptionsHandler;
+use RestClientBundle\Services\RestClient;
 
 /**
  * Factory for rest clients

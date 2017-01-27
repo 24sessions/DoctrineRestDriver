@@ -16,9 +16,9 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Tests\Factory;
+namespace DoctrineRestDriver\Tests\Factory;
 
-use Circle\DoctrineRestDriver\Factory\RestClientFactory;
+use DoctrineRestDriver\Factory\RestClientFactory;
 
 /**
  * Tests the restclient factory
@@ -26,7 +26,7 @@ use Circle\DoctrineRestDriver\Factory\RestClientFactory;
  * @author    Tobias Hauck <tobias@circle.ai>
  * @copyright 2015 TeeAge-Beatz UG
  *
- * @coversDefaultClass Circle\DoctrineRestDriver\Factory\RestClientFactory
+ * @coversDefaultClass DoctrineRestDriver\Factory\RestClientFactory
  */
 class RestClientFactoryTest extends \PHPUnit_Framework_TestCase {
 
@@ -37,6 +37,6 @@ class RestClientFactoryTest extends \PHPUnit_Framework_TestCase {
      */
     public function createOne() {
         $factory = new RestClientFactory();
-        $this->assertInstanceOf('Circle\RestClientBundle\Services\RestClient', $factory->createOne([]));
+        $this->assertInstanceOf('RestClientBundle\Services\RestClient', $factory->createOne([]));
     }
 }

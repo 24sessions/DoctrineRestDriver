@@ -16,14 +16,14 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Validation;
+namespace DoctrineRestDriver\Validation;
 
-use Circle\DoctrineRestDriver\Exceptions\InvalidAuthStrategyException;
-use Circle\DoctrineRestDriver\Exceptions\UnsupportedFetchModeException;
-use Circle\DoctrineRestDriver\Security\AuthStrategy;
-use Circle\DoctrineRestDriver\Validation\Exceptions\InvalidTypeException;
-use Circle\DoctrineRestDriver\Validation\Exceptions\NotNilException;
-use Circle\DoctrineRestDriver\Exceptions\Exceptions;
+use DoctrineRestDriver\Exceptions\InvalidAuthStrategyException;
+use DoctrineRestDriver\Exceptions\UnsupportedFetchModeException;
+use DoctrineRestDriver\Security\AuthStrategy;
+use DoctrineRestDriver\Validation\Exceptions\InvalidTypeException;
+use DoctrineRestDriver\Validation\Exceptions\NotNilException;
+use DoctrineRestDriver\Exceptions\Exceptions;
 use Prophecy\Exception\Doubler\ClassNotFoundException;
 
 /**

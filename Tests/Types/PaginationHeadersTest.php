@@ -16,9 +16,9 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Tests\Types;
+namespace DoctrineRestDriver\Tests\Types;
 
-use Circle\DoctrineRestDriver\Types\PaginationHeaders;
+use DoctrineRestDriver\Types\PaginationHeaders;
 use PHPSQLParser\PHPSQLParser;
 /**
  * Tests pagination headers
@@ -26,7 +26,7 @@ use PHPSQLParser\PHPSQLParser;
  * @author    Djane Rey Mabelin <thedjaney@gmail.com>
  * @copyright 2016
  *
- * @coversDefaultClass Circle\DoctrineRestDriver\Types\PaginationHeaders
+ * @coversDefaultClass DoctrineRestDriver\Types\PaginationHeaders
  */
 class PaginationHeadersTest extends \PHPUnit_Framework_TestCase {
 

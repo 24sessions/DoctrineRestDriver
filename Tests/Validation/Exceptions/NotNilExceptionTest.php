@@ -16,9 +16,9 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Tests\Validation\Exceptions;
+namespace DoctrineRestDriver\Tests\Validation\Exceptions;
 
-use Circle\DoctrineRestDriver\Validation\Exceptions\NotNilException;
+use DoctrineRestDriver\Validation\Exceptions\NotNilException;
 
 /**
  * Tests the invalid type exception
@@ -26,7 +26,7 @@ use Circle\DoctrineRestDriver\Validation\Exceptions\NotNilException;
  * @author    Tobias Hauck <tobias@circle.ai>
  * @copyright 2015 TeeAge-Beatz UG
  *
- * @coversDefaultClass Circle\DoctrineRestDriver\Validation\Exceptions\NotNilException
+ * @coversDefaultClass DoctrineRestDriver\Validation\Exceptions\NotNilException
  *
  * @SuppressWarnings("PHPMD.StaticAccess")
  */

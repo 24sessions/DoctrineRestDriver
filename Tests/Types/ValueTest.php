@@ -16,9 +16,9 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Tests\Types;
+namespace DoctrineRestDriver\Tests\Types;
 
-use Circle\DoctrineRestDriver\Types\Value;
+use DoctrineRestDriver\Types\Value;
 
 /**
  * Tests the value type
@@ -26,7 +26,7 @@ use Circle\DoctrineRestDriver\Types\Value;
  * @author    Tobias Hauck <tobias@circle.ai>
  * @copyright 2015 TeeAge-Beatz UG
  *
- * @coversDefaultClass Circle\DoctrineRestDriver\Types\Value
+ * @coversDefaultClass DoctrineRestDriver\Types\Value
  */
 class ValueTest extends \PHPUnit_Framework_TestCase {
 

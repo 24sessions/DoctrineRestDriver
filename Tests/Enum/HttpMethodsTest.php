@@ -16,10 +16,10 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Tests\Enums;
+namespace DoctrineRestDriver\Tests\Enums;
 
-use Circle\DoctrineRestDriver\Enums\HttpMethods;
-use Circle\DoctrineRestDriver\Enums\SqlOperations;
+use DoctrineRestDriver\Enums\HttpMethods;
+use DoctrineRestDriver\Enums\SqlOperations;
 
 /**
  * Tests the http methods enum
@@ -27,7 +27,7 @@ use Circle\DoctrineRestDriver\Enums\SqlOperations;
  * @author    Tobias Hauck <tobias@circle.ai>
  * @copyright 2015 TeeAge-Beatz UG
  *
- * @coversDefaultClass Circle\DoctrineRestDriver\Enums\HttpMethods
+ * @coversDefaultClass DoctrineRestDriver\Enums\HttpMethods
  */
 class HttpMethodsTest extends \PHPUnit_Framework_TestCase {
 

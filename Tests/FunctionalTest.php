@@ -16,10 +16,10 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Tests;
+namespace DoctrineRestDriver\Tests;
 
-use Circle\DoctrineRestDriver\Tests\Entity\AssociatedEntity;
-use Circle\DoctrineRestDriver\Tests\Entity\TestEntity;
+use DoctrineRestDriver\Tests\Entity\AssociatedEntity;
+use DoctrineRestDriver\Tests\Entity\TestEntity;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -60,13 +60,13 @@ class FunctionalTest extends WebTestCase {
     /**
      * @test
      * @group  functional
-     * @covers Circle\DoctrineRestDriver\Driver
-     * @covers Circle\DoctrineRestDriver\Connection
-     * @covers Circle\DoctrineRestDriver\Statement
-     * @covers Circle\DoctrineRestDriver\Statement::<private>
+     * @covers DoctrineRestDriver\Driver
+     * @covers DoctrineRestDriver\Connection
+     * @covers DoctrineRestDriver\Statement
+     * @covers DoctrineRestDriver\Statement::<private>
      */
     public function find() {
-        $entity = $this->em->find('Circle\DoctrineRestDriver\Tests\Entity\TestEntity', 1);
+        $entity = $this->em->find('DoctrineRestDriver\Tests\Entity\TestEntity', 1);
         $this->assertSame(1,         $entity->getId());
         $this->assertSame('MyName',  $entity->getName());
         $this->assertSame('MyValue', $entity->getValue());
@@ -75,26 +75,26 @@ class FunctionalTest extends WebTestCase {
     /**
      * @test
      * @group  functional
-     * @covers Circle\DoctrineRestDriver\Driver
-     * @covers Circle\DoctrineRestDriver\Connection
-     * @covers Circle\DoctrineRestDriver\Statement
-     * @covers Circle\DoctrineRestDriver\Statement::<private>
+     * @covers DoctrineRestDriver\Driver
+     * @covers DoctrineRestDriver\Connection
+     * @covers DoctrineRestDriver\Statement
+     * @covers DoctrineRestDriver\Statement::<private>
      * @expectedException \Exception
      */
     public function findNonExisting() {
-        $this->em->find('Circle\DoctrineRestDriver\Tests\Entity\TestEntity', 2);
+        $this->em->find('DoctrineRestDriver\Tests\Entity\TestEntity', 2);
     }
 
     /**
      * @test
      * @group  functional
-     * @covers Circle\DoctrineRestDriver\Driver
-     * @covers Circle\DoctrineRestDriver\Connection
-     * @covers Circle\DoctrineRestDriver\Statement
-     * @covers Circle\DoctrineRestDriver\Statement::<private>
+     * @covers DoctrineRestDriver\Driver
+     * @covers DoctrineRestDriver\Connection
+     * @covers DoctrineRestDriver\Statement
+     * @covers DoctrineRestDriver\Statement::<private>
      */
     public function findOneBy() {
-        $entity = $this->em->getRepository('Circle\DoctrineRestDriver\Tests\Entity\TestEntity')->findOneBy(['id' => 1]);
+        $entity = $this->em->getRepository('DoctrineRestDriver\Tests\Entity\TestEntity')->findOneBy(['id' => 1]);
         $this->assertSame(1,          $entity->getId());
         $this->assertSame('MyName',   $entity->getName());
         $this->assertSame('MyValue',  $entity->getValue());
@@ -103,13 +103,13 @@ class FunctionalTest extends WebTestCase {
     /**
      * @test
      * @group  functional
-     * @covers Circle\DoctrineRestDriver\Driver
-     * @covers Circle\DoctrineRestDriver\Connection
-     * @covers Circle\DoctrineRestDriver\Statement
-     * @covers Circle\DoctrineRestDriver\Statement::<private>
+     * @covers DoctrineRestDriver\Driver
+     * @covers DoctrineRestDriver\Connection
+     * @covers DoctrineRestDriver\Statement
+     * @covers DoctrineRestDriver\Statement::<private>
      */
     public function findBy() {
-        $entity = $this->em->getRepository('Circle\DoctrineRestDriver\Tests\Entity\TestEntity')->findBy(['id' => 1]);
+        $entity = $this->em->getRepository('DoctrineRestDriver\Tests\Entity\TestEntity')->findBy(['id' => 1]);
         $this->assertTrue(is_array($entity));
         $this->assertSame(1,          $entity[0]->getId());
         $this->assertSame('MyName',   $entity[0]->getName());
@@ -119,13 +119,13 @@ class FunctionalTest extends WebTestCase {
     /**
      * @test
      * @group  functional
-     * @covers Circle\DoctrineRestDriver\Driver
-     * @covers Circle\DoctrineRestDriver\Connection
-     * @covers Circle\DoctrineRestDriver\Statement
-     * @covers Circle\DoctrineRestDriver\Statement::<private>
+     * @covers DoctrineRestDriver\Driver
+     * @covers DoctrineRestDriver\Connection
+     * @covers DoctrineRestDriver\Statement
+     * @covers DoctrineRestDriver\Statement::<private>
      */
     public function findAll() {
-        $entity = $this->em->getRepository('Circle\DoctrineRestDriver\Tests\Entity\TestEntity')->findAll();
+        $entity = $this->em->getRepository('DoctrineRestDriver\Tests\Entity\TestEntity')->findAll();
         $this->assertTrue(is_array($entity));
 
         $this->assertSame(1,         $entity[0]->getId());
@@ -140,10 +140,10 @@ class FunctionalTest extends WebTestCase {
     /**
      * @test
      * @group  functional
-     * @covers Circle\DoctrineRestDriver\Driver
-     * @covers Circle\DoctrineRestDriver\Connection
-     * @covers Circle\DoctrineRestDriver\Statement
-     * @covers Circle\DoctrineRestDriver\Statement::<private>
+     * @covers DoctrineRestDriver\Driver
+     * @covers DoctrineRestDriver\Connection
+     * @covers DoctrineRestDriver\Statement
+     * @covers DoctrineRestDriver\Statement::<private>
      */
     public function persistAndFlush() {
         $entity = new TestEntity();
@@ -166,13 +166,13 @@ class FunctionalTest extends WebTestCase {
     /**
      * @test
      * @group  functional
-     * @covers Circle\DoctrineRestDriver\Driver
-     * @covers Circle\DoctrineRestDriver\Connection
-     * @covers Circle\DoctrineRestDriver\Statement
-     * @covers Circle\DoctrineRestDriver\Statement::<private>
+     * @covers DoctrineRestDriver\Driver
+     * @covers DoctrineRestDriver\Connection
+     * @covers DoctrineRestDriver\Statement
+     * @covers DoctrineRestDriver\Statement::<private>
      */
     public function updateAndFlush() {
-        $entity = $this->em->find('Circle\DoctrineRestDriver\Tests\Entity\TestEntity', 1);
+        $entity = $this->em->find('DoctrineRestDriver\Tests\Entity\TestEntity', 1);
         $entity->setName('newName');
         $this->em->flush();
 
@@ -184,13 +184,13 @@ class FunctionalTest extends WebTestCase {
     /**
      * @test
      * @group  functional
-     * @covers Circle\DoctrineRestDriver\Driver
-     * @covers Circle\DoctrineRestDriver\Connection
-     * @covers Circle\DoctrineRestDriver\Statement
-     * @covers Circle\DoctrineRestDriver\Statement::<private>
+     * @covers DoctrineRestDriver\Driver
+     * @covers DoctrineRestDriver\Connection
+     * @covers DoctrineRestDriver\Statement
+     * @covers DoctrineRestDriver\Statement::<private>
      */
     public function remove() {
-        $entity = $this->em->find('Circle\DoctrineRestDriver\Tests\Entity\TestEntity', 1);
+        $entity = $this->em->find('DoctrineRestDriver\Tests\Entity\TestEntity', 1);
         $this->em->remove($entity);
         $this->em->flush();
     }
@@ -198,14 +198,14 @@ class FunctionalTest extends WebTestCase {
     /**
      * @test
      * @group  functional
-     * @covers Circle\DoctrineRestDriver\Driver
-     * @covers Circle\DoctrineRestDriver\Connection
-     * @covers Circle\DoctrineRestDriver\Statement
-     * @covers Circle\DoctrineRestDriver\Statement::<private>
+     * @covers DoctrineRestDriver\Driver
+     * @covers DoctrineRestDriver\Connection
+     * @covers DoctrineRestDriver\Statement
+     * @covers DoctrineRestDriver\Statement::<private>
      */
     public function dql() {
         $entity = $this->em
-            ->createQuery('SELECT p FROM Circle\DoctrineRestDriver\Tests\Entity\TestEntity p WHERE p.id = 1')
+            ->createQuery('SELECT p FROM DoctrineRestDriver\Tests\Entity\TestEntity p WHERE p.id = 1')
             ->getSingleResult();
 
         $this->assertSame(1,         $entity->getId());
@@ -216,14 +216,14 @@ class FunctionalTest extends WebTestCase {
     /**
      * @test
      * @group  functional
-     * @covers Circle\DoctrineRestDriver\Driver
-     * @covers Circle\DoctrineRestDriver\Connection
-     * @covers Circle\DoctrineRestDriver\Statement
-     * @covers Circle\DoctrineRestDriver\Statement::<private>
+     * @covers DoctrineRestDriver\Driver
+     * @covers DoctrineRestDriver\Connection
+     * @covers DoctrineRestDriver\Statement
+     * @covers DoctrineRestDriver\Statement::<private>
      */
     public function nativeQuery() {
         $mapping = new ResultSetMapping();
-        $mapping->addEntityResult('Circle\DoctrineRestDriver\Tests\Entity\TestEntity', 'products');
+        $mapping->addEntityResult('DoctrineRestDriver\Tests\Entity\TestEntity', 'products');
         $mapping->addFieldResult('products', 'id', 'id');
         $mapping->addFieldResult('products', 'name', 'name');
         $entity = $this->em->createNativeQuery('SELECT id, name FROM products', $mapping)->getResult();
@@ -240,14 +240,14 @@ class FunctionalTest extends WebTestCase {
     /**
      * @test
      * @group  functional
-     * @covers Circle\DoctrineRestDriver\Driver
-     * @covers Circle\DoctrineRestDriver\Connection
-     * @covers Circle\DoctrineRestDriver\Statement
-     * @covers Circle\DoctrineRestDriver\Statement::<private>
+     * @covers DoctrineRestDriver\Driver
+     * @covers DoctrineRestDriver\Connection
+     * @covers DoctrineRestDriver\Statement
+     * @covers DoctrineRestDriver\Statement::<private>
      */
     public function dqlWithOrderBy() {
         $entity = $this->em
-            ->createQuery('SELECT p FROM Circle\DoctrineRestDriver\Tests\Entity\TestEntity p ORDER BY p.name DESC')
+            ->createQuery('SELECT p FROM DoctrineRestDriver\Tests\Entity\TestEntity p ORDER BY p.name DESC')
             ->getResult();
 
         $this->assertSame(2,           $entity[0]->getId());
@@ -262,14 +262,14 @@ class FunctionalTest extends WebTestCase {
     /**
      * @test
      * @group  functional
-     * @covers Circle\DoctrineRestDriver\Driver
-     * @covers Circle\DoctrineRestDriver\Connection
-     * @covers Circle\DoctrineRestDriver\Statement
-     * @covers Circle\DoctrineRestDriver\Statement::<private>
+     * @covers DoctrineRestDriver\Driver
+     * @covers DoctrineRestDriver\Connection
+     * @covers DoctrineRestDriver\Statement
+     * @covers DoctrineRestDriver\Statement::<private>
      */
     public function dqlWithObjectParameter() {
         $entity = $this->em
-            ->createQuery('SELECT p FROM Circle\DoctrineRestDriver\Tests\Entity\TestEntity p WHERE p.name = ?1')
+            ->createQuery('SELECT p FROM DoctrineRestDriver\Tests\Entity\TestEntity p WHERE p.name = ?1')
             ->setParameter(1, new \DateTime())
             ->getResult();
 
@@ -279,13 +279,13 @@ class FunctionalTest extends WebTestCase {
     /**
      * @test
      * @group  functional
-     * @covers Circle\DoctrineRestDriver\Driver
-     * @covers Circle\DoctrineRestDriver\Connection
-     * @covers Circle\DoctrineRestDriver\Statement
-     * @covers Circle\DoctrineRestDriver\Statement::<private>
+     * @covers DoctrineRestDriver\Driver
+     * @covers DoctrineRestDriver\Connection
+     * @covers DoctrineRestDriver\Statement
+     * @covers DoctrineRestDriver\Statement::<private>
      * @expectedException \Exception
      */
     public function nonImplementedEntity() {
-        $this->em->find('Circle\DoctrineRestDriver\Entity\NonImplementedEntity', 1);
+        $this->em->find('DoctrineRestDriver\Entity\NonImplementedEntity', 1);
     }
 }

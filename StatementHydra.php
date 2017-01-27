@@ -1,10 +1,10 @@
 <?php
 
-namespace Circle\DoctrineRestDriver;
+namespace DoctrineRestDriver;
 
-use Circle\DoctrineRestDriver\Enums\HttpMethods;
-use Circle\DoctrineRestDriver\Types\Request;
-use Circle\DoctrineRestDriver\Types\Result;
+use DoctrineRestDriver\Enums\HttpMethods;
+use DoctrineRestDriver\Types\Request;
+use DoctrineRestDriver\Types\Result;
 use Symfony\Component\HttpFoundation\Response;
 
 class StatementHydra extends Statement {

@@ -16,11 +16,11 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver;
+namespace DoctrineRestDriver;
 
-use Circle\DoctrineRestDriver\Factory\RestClientFactory;
-use Circle\DoctrineRestDriver\Types\RestClientOptions;
-use Circle\RestClientBundle\Services\RestClient;
+use DoctrineRestDriver\Factory\RestClientFactory;
+use DoctrineRestDriver\Types\RestClientOptions;
+use RestClientBundle\Services\RestClient;
 use Doctrine\DBAL\Driver as DriverInterface;
 use Doctrine\DBAL\Connection as AbstractConnection;
 use Doctrine\DBAL\Platforms\MySqlPlatform;

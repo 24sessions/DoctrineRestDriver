@@ -16,10 +16,10 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Tests\Types;
+namespace DoctrineRestDriver\Tests\Types;
 
-use Circle\DoctrineRestDriver\Enums\SqlOperations;
-use Circle\DoctrineRestDriver\Types\SqlOperation;
+use DoctrineRestDriver\Enums\SqlOperations;
+use DoctrineRestDriver\Types\SqlOperation;
 use PHPSQLParser\PHPSQLParser;
 
 /**
@@ -28,7 +28,7 @@ use PHPSQLParser\PHPSQLParser;
  * @author    Tobias Hauck <tobias@circle.ai>
  * @copyright 2015 TeeAge-Beatz UG
  *
- * @coversDefaultClass Circle\DoctrineRestDriver\Types\SqlOperation
+ * @coversDefaultClass DoctrineRestDriver\Types\SqlOperation
  */
 class SqlOperationTest extends \PHPUnit_Framework_TestCase {
 

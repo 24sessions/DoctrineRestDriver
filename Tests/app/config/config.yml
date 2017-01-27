@@ -32,7 +32,7 @@ framework:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver_class:   Circle\DoctrineRestDriver\Driver
+        driver_class:   DoctrineRestDriver\Driver
         host:     "%database_host%"
         port:     "%database_port%"
         dbname:   "%database_name%"

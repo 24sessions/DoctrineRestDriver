@@ -16,9 +16,9 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Tests;
+namespace DoctrineRestDriver\Tests;
 
-use Circle\DoctrineRestDriver\Driver;
+use DoctrineRestDriver\Driver;
 
 /**
  * Tests the driver
@@ -26,7 +26,7 @@ use Circle\DoctrineRestDriver\Driver;
  * @author    Tobias Hauck <tobias@circle.ai>
  * @copyright 2015 TeeAge-Beatz UG
  *
- * @coversDefaultClass Circle\DoctrineRestDriver\Driver
+ * @coversDefaultClass DoctrineRestDriver\Driver
  */
 class DriverTest extends \PHPUnit_Framework_TestCase {
 
@@ -57,7 +57,7 @@ class DriverTest extends \PHPUnit_Framework_TestCase {
      * @covers ::getSchemaManager
      */
     public function getSchemaManager() {
-        $connection = $this->getMockBuilder('Circle\DoctrineRestDriver\Connection')->disableOriginalConstructor()->getMock();
+        $connection = $this->getMockBuilder('DoctrineRestDriver\Connection')->disableOriginalConstructor()->getMock();
         $this->assertInstanceOf('Doctrine\DBAL\Schema\MySqlSchemaManager', $this->driver->getSchemaManager($connection));
     }
 
@@ -76,7 +76,7 @@ class DriverTest extends \PHPUnit_Framework_TestCase {
      * @covers ::getDatabase
      */
     public function getDatabase() {
-        $connection = $this->getMockBuilder('Circle\DoctrineRestDriver\Connection')->disableOriginalConstructor()->getMock();
+        $connection = $this->getMockBuilder('DoctrineRestDriver\Connection')->disableOriginalConstructor()->getMock();
         $this->assertSame('rest_database', $this->driver->getDatabase($connection));
     }
 
@@ -96,6 +96,6 @@ class DriverTest extends \PHPUnit_Framework_TestCase {
             'host'     => 'localhost'
         ];
         $connection = $this->driver->connect($params);
-        $this->assertInstanceOf('Circle\DoctrineRestDriver\Connection', $connection);
+        $this->assertInstanceOf('DoctrineRestDriver\Connection', $connection);
     }
 }

@@ -16,7 +16,7 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Validation\Exceptions;
+namespace DoctrineRestDriver\Validation\Exceptions;
 
 /**
  * Exception for values that should not be nil

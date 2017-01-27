@@ -16,10 +16,10 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Tests\Validation;
+namespace DoctrineRestDriver\Tests\Validation;
 
-use Circle\DoctrineRestDriver\Security\HttpAuthentication;
-use Circle\DoctrineRestDriver\Validation\Assertions;
+use DoctrineRestDriver\Security\HttpAuthentication;
+use DoctrineRestDriver\Validation\Assertions;
 
 /**
  * Tests the driver
@@ -27,7 +27,7 @@ use Circle\DoctrineRestDriver\Validation\Assertions;
  * @author    Tobias Hauck <tobias@circle.ai>
  * @copyright 2015 TeeAge-Beatz UG
  *
- * @coversDefaultClass Circle\DoctrineRestDriver\Validation\Assertions
+ * @coversDefaultClass DoctrineRestDriver\Validation\Assertions
  */
 class AssertionsTest extends \PHPUnit_Framework_TestCase {
 
@@ -88,7 +88,7 @@ class AssertionsTest extends \PHPUnit_Framework_TestCase {
      * @SuppressWarnings("PHPMD.StaticAccess")
      */
     public function assertClassExistsTest() {
-        $this->assertSame(null, Assertions::assertClassExists('Circle\DoctrineRestDriver\Tests\Validation\AssertionsTest'));
+        $this->assertSame(null, Assertions::assertClassExists('DoctrineRestDriver\Tests\Validation\AssertionsTest'));
     }
 
     /**

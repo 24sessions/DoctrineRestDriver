@@ -16,8 +16,8 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Types;
-use Circle\DoctrineRestDriver\Enums\SqlOperations;
+namespace DoctrineRestDriver\Types;
+use DoctrineRestDriver\Enums\SqlOperations;
 use PHPSQLParser\PHPSQLParser;
 
 /**

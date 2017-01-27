@@ -16,10 +16,10 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Tests\Exceptions;
+namespace DoctrineRestDriver\Tests\Exceptions;
 
-use Circle\DoctrineRestDriver\Exceptions\Exceptions;
-use Circle\DoctrineRestDriver\Types\Request;
+use DoctrineRestDriver\Exceptions\Exceptions;
+use DoctrineRestDriver\Types\Request;
 
 /**
  * Tests the exceptions trait
@@ -27,7 +27,7 @@ use Circle\DoctrineRestDriver\Types\Request;
  * @author    Tobias Hauck <tobias@circle.ai>
  * @copyright 2015 TeeAge-Beatz UG
  *
- * @coversDefaultClass Circle\DoctrineRestDriver\Exceptions\Exceptions
+ * @coversDefaultClass DoctrineRestDriver\Exceptions\Exceptions
  *
  * @SuppressWarnings("PHPMD.StaticAccess")
  */
@@ -37,7 +37,7 @@ class ExceptionsTest extends \PHPUnit_Framework_TestCase {
      * @test
      * @group  unit
      * @covers ::invalidTypeException
-     * @expectedException \Circle\DoctrineRestDriver\Validation\Exceptions\InvalidTypeException
+     * @expectedException \DoctrineRestDriver\Validation\Exceptions\InvalidTypeException
      */
     public function invalidTypeExceptionTest() {
         Exceptions::invalidTypeException('expected', 'key', 'value');
@@ -47,7 +47,7 @@ class ExceptionsTest extends \PHPUnit_Framework_TestCase {
      * @test
      * @group  unit
      * @covers ::notNilException
-     * @expectedException \Circle\DoctrineRestDriver\Validation\Exceptions\NotNilException
+     * @expectedException \DoctrineRestDriver\Validation\Exceptions\NotNilException
      */
     public function notNilExceptionTest() {
         Exceptions::notNilException('test');
@@ -57,8 +57,8 @@ class ExceptionsTest extends \PHPUnit_Framework_TestCase {
      * @test
      * @group  unit
      * @covers ::unsupportedFetchModeException
-     * @covers Circle\DoctrineRestDriver\Exceptions\UnsupportedFetchModeException::__construct
-     * @expectedException \Circle\DoctrineRestDriver\Exceptions\UnsupportedFetchModeException
+     * @covers DoctrineRestDriver\Exceptions\UnsupportedFetchModeException::__construct
+     * @expectedException \DoctrineRestDriver\Exceptions\UnsupportedFetchModeException
      *
      * @SuppressWarnings("PHPMD.StaticAccess")
      */
@@ -70,8 +70,8 @@ class ExceptionsTest extends \PHPUnit_Framework_TestCase {
      * @test
      * @group  unit
      * @covers ::methodNotImplementedException
-     * @covers Circle\DoctrineRestDriver\Exceptions\MethodNotImplementedException::__construct
-     * @expectedException \Circle\DoctrineRestDriver\Exceptions\MethodNotImplementedException
+     * @covers DoctrineRestDriver\Exceptions\MethodNotImplementedException::__construct
+     * @expectedException \DoctrineRestDriver\Exceptions\MethodNotImplementedException
      *
      * @SuppressWarnings("PHPMD.StaticAccess")
      */
@@ -83,8 +83,8 @@ class ExceptionsTest extends \PHPUnit_Framework_TestCase {
      * @test
      * @group  unit
      * @covers ::requestFailedException
-     * @covers Circle\DoctrineRestDriver\Exceptions\RequestFailedException::__construct
-     * @expectedException \Circle\DoctrineRestDriver\Exceptions\RequestFailedException
+     * @covers DoctrineRestDriver\Exceptions\RequestFailedException::__construct
+     * @expectedException \DoctrineRestDriver\Exceptions\RequestFailedException
      *
      * @SuppressWarnings("PHPMD.StaticAccess")
      */
@@ -96,8 +96,8 @@ class ExceptionsTest extends \PHPUnit_Framework_TestCase {
      * @test
      * @group  unit
      * @covers ::invalidAuthStrategyException
-     * @covers Circle\DoctrineRestDriver\Exceptions\InvalidAuthStrategyException::__construct
-     * @expectedException \Circle\DoctrineRestDriver\Exceptions\InvalidAuthStrategyException
+     * @covers DoctrineRestDriver\Exceptions\InvalidAuthStrategyException::__construct
+     * @expectedException \DoctrineRestDriver\Exceptions\InvalidAuthStrategyException
      *
      * @SuppressWarnings("PHPMD.StaticAccess")
      */
@@ -109,8 +109,8 @@ class ExceptionsTest extends \PHPUnit_Framework_TestCase {
      * @test
      * @group  unit
      * @covers ::invalidSqlOperationException
-     * @covers Circle\DoctrineRestDriver\Exceptions\InvalidSqlOperationException::__construct
-     * @expectedException \Circle\DoctrineRestDriver\Exceptions\InvalidSqlOperationException
+     * @covers DoctrineRestDriver\Exceptions\InvalidSqlOperationException::__construct
+     * @expectedException \DoctrineRestDriver\Exceptions\InvalidSqlOperationException
      *
      * @SuppressWarnings("PHPMD.StaticAccess")
      */

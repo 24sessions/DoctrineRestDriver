@@ -402,7 +402,7 @@ typedef RegisteredUser {
 First, we need to build an additional entity "User":
 
 ```php
-namespace Circle\Entity;
+namespace Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

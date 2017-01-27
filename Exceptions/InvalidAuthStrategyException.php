@@ -16,7 +16,7 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Exceptions;
+namespace DoctrineRestDriver\Exceptions;
 
 /**
  * Exception class for invalid auth strategy
@@ -34,6 +34,6 @@ class InvalidAuthStrategyException extends \Exception {
      * @param string $class
      */
     public function __construct($class) {
-        parent::__construct('Class ' . $class . ' must implement Circle\DoctrineRestDriver\Types\Request\AuthStrategy to act as authenticator');
+        parent::__construct('Class ' . $class . ' must implement DoctrineRestDriver\Types\Request\AuthStrategy to act as authenticator');
     }
 }

@@ -16,9 +16,9 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Tests\Types;
+namespace DoctrineRestDriver\Tests\Types;
 
-use Circle\DoctrineRestDriver\Types\Payload;
+use DoctrineRestDriver\Types\Payload;
 use PHPSQLParser\PHPSQLParser;
 
 /**
@@ -27,7 +27,7 @@ use PHPSQLParser\PHPSQLParser;
  * @author    Tobias Hauck <tobias@circle.ai>
  * @copyright 2015 TeeAge-Beatz UG
  *
- * @coversDefaultClass Circle\DoctrineRestDriver\Types\Payload
+ * @coversDefaultClass DoctrineRestDriver\Types\Payload
  */
 class PayloadTest extends \PHPUnit_Framework_TestCase {
 

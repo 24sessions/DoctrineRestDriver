@@ -16,7 +16,7 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Enums;
+namespace DoctrineRestDriver\Enums;
 
 /**
  * Contains all available sql operations

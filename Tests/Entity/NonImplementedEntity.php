@@ -16,7 +16,7 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Tests\Entity;
+namespace DoctrineRestDriver\Tests\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 

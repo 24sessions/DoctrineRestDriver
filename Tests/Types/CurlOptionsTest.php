@@ -16,9 +16,9 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Tests\Types;
+namespace DoctrineRestDriver\Tests\Types;
 
-use Circle\DoctrineRestDriver\Types\CurlOptions;
+use DoctrineRestDriver\Types\CurlOptions;
 
 /**
  * Tests the curl options
@@ -26,7 +26,7 @@ use Circle\DoctrineRestDriver\Types\CurlOptions;
  * @author    Tobias Hauck <tobias@circle.ai>
  * @copyright 2015 TeeAge-Beatz UG
  *
- * @coversDefaultClass Circle\DoctrineRestDriver\Types\CurlOptions
+ * @coversDefaultClass DoctrineRestDriver\Types\CurlOptions
  */
 class CurlOptionsTest extends \PHPUnit_Framework_TestCase {
 

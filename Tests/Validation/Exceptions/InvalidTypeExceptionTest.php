@@ -16,9 +16,9 @@
  * along with DoctrineRestDriver.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Circle\DoctrineRestDriver\Tests\Validation\Exceptions;
+namespace DoctrineRestDriver\Tests\Validation\Exceptions;
 
-use Circle\DoctrineRestDriver\Validation\Exceptions\InvalidTypeException;
+use DoctrineRestDriver\Validation\Exceptions\InvalidTypeException;
 
 /**
  * Tests the invalid type exception
@@ -26,7 +26,7 @@ use Circle\DoctrineRestDriver\Validation\Exceptions\InvalidTypeException;
  * @author    Tobias Hauck <tobias@circle.ai>
  * @copyright 2015 TeeAge-Beatz UG
  *
- * @coversDefaultClass Circle\DoctrineRestDriver\Validation\Exceptions\InvalidTypeException
+ * @coversDefaultClass DoctrineRestDriver\Validation\Exceptions\InvalidTypeException
  *
  * @SuppressWarnings("PHPMD.StaticAccess")
  */
