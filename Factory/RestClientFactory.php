@@ -18,10 +18,9 @@
 
 namespace DoctrineRestDriver\Factory;
 
-use DoctrineRestDriver\Types\RestClientOptions;
-use RestClientBundle\Services\Curl;
-use RestClientBundle\Services\CurlOptionsHandler;
-use RestClientBundle\Services\RestClient;
+use Circle\RestClientBundle\Services\Curl;
+use Circle\RestClientBundle\Services\CurlOptionsHandler;
+use Circle\RestClientBundle\Services\RestClient;
 
 /**
  * Factory for rest clients

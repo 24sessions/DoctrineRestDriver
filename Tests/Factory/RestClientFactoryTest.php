@@ -37,6 +37,6 @@ class RestClientFactoryTest extends \PHPUnit_Framework_TestCase {
      */
     public function createOne() {
         $factory = new RestClientFactory();
-        $this->assertInstanceOf('RestClientBundle\Services\RestClient', $factory->createOne([]));
+        $this->assertInstanceOf('Circle\RestClientBundle\Services\RestClient', $factory->createOne([]));
     }
 }

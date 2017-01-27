@@ -20,7 +20,7 @@ namespace DoctrineRestDriver;
 
 use DoctrineRestDriver\Factory\RestClientFactory;
 use DoctrineRestDriver\Types\RestClientOptions;
-use RestClientBundle\Services\RestClient;
+use Circle\RestClientBundle\Services\RestClient;
 use Doctrine\DBAL\Driver as DriverInterface;
 use Doctrine\DBAL\Connection as AbstractConnection;
 use Doctrine\DBAL\Platforms\MySqlPlatform;
