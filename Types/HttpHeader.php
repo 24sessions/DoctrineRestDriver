@@ -35,7 +35,7 @@ class HttpHeader {
      * @SuppressWarnings("PHPMD.StaticAccess")
      */
     public static function create(array $options, array $tokens) {
-        $headers = $options['CURLOPT_HTTPHEADER'];
+        $headers = $options[CURLOPT_HTTPHEADER];
 
         $headers = empty($headers) ? [] : $headers;
         $headers = is_string($headers) ? explode(',', $headers) : $headers;
@@ -45,6 +45,6 @@ class HttpHeader {
             PaginationHeaders::create($tokens),
             OrderingHeaders::create($tokens)
         );
-        return ['CURLOPT_HTTPHEADER'=>$headers];
+        return [CURLOPT_HTTPHEADER=>$headers];
     }
 }
