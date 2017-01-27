@@ -41,5 +41,24 @@
     "greenlion/php-sql-parser": "^4.0",
     "ci/restclientbundle": "^1.0",
     "league/oauth2-client": "^1.0|^2.0"
-  }
+  },
+  "repositories": [
+    {
+      "type": "package",
+      "package": {
+        "name": "24sessions/doctrine-rest-driver",
+        "version": "dev-master",
+        "source": {
+          "url": "git@github.com:24sessions/DoctrineRestDriver.git",
+          "type": "git",
+          "reference": "master"
+        },
+        "autoload": {
+          "psr-0": {
+            "24sessions\\DoctrineRestDriver": ""
+          }
+        }
+      }
+    }
+  ]
 }
