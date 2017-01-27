@@ -60,6 +60,6 @@ doctrine:
                         mapping: true
                         type:    "annotation"
                         dir:     "%kernel.root_dir%/../Entity"
-                        prefix:  "Circle\\DoctrineRestDriver\\Tests\\Entity"
+                        prefix:  "DoctrineRestDriver\\Tests\\Entity"
                         alias:   "CircleDoctrineRestDriver"
                         is_bundle: false
