@@ -32,7 +32,7 @@
   "target-dir": "24sessions/DoctrineRestDriver",
   "extra": {
     "branch-alias": {
-      "dev-master": "0.2-dev"
+      "dev-master": "1.0"
     }
   },
   "require": {
@@ -40,6 +40,6 @@
     "doctrine/doctrine-bundle": "^1.6",
     "greenlion/php-sql-parser": "^4.0",
     "ci/restclientbundle": "^1.0",
-    "circle/doctrine-rest-driver": "^2.2"
+    "league/oauth2-client": "^1.0|^2.0"
   }
 }
