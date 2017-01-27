@@ -35,7 +35,7 @@ class HttpHeader {
      * @SuppressWarnings("PHPMD.StaticAccess")
      */
     public static function create(array $options, array $tokens) {
-        $headers = empty($options[CURLOPT_HTTPHEADER]) ? [] : $options[CURLOPT_HTTPHEADER];
+        $headers = empty($options['CURLOPT_HTTPHEADER']) ? [] : $options['CURLOPT_HTTPHEADER'];
         $headers = is_string($headers) ? explode(',', $headers) : $headers;
 
         $headers = array_merge(
@@ -43,6 +43,6 @@ class HttpHeader {
             PaginationHeaders::create($tokens),
             OrderingHeaders::create($tokens)
         );
-        return [CURLOPT_HTTPHEADER=>$headers];
+        return ['CURLOPT_HTTPHEADER'=>$headers];
     }
 }
