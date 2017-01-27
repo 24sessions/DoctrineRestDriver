@@ -1,9 +1,8 @@
 <?php
 
-namespace AppBundle\Entity\RestDriver;
+namespace Circle\DoctrineRestDriver;
 
 use Circle\DoctrineRestDriver\Enums\HttpMethods;
-use Circle\DoctrineRestDriver\Statement;
 use Circle\DoctrineRestDriver\Types\Request;
 use Circle\DoctrineRestDriver\Types\Result;
 use Symfony\Component\HttpFoundation\Response;

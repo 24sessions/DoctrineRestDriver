@@ -1,8 +1,7 @@
 <?php
 
-namespace AuthBundle\Security;
+namespace Circle\DoctrineRestDriver\Security;
 
-use Circle\DoctrineRestDriver\Security\AuthStrategy;
 use Circle\DoctrineRestDriver\Types\Request;
 use League\OAuth2\Client\Token\AccessToken;
 
