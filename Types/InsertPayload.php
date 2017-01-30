@@ -45,9 +45,10 @@ class InsertPayload {
         });
 
         $columns = explode(',', str_replace(['(', ')', ' '], '', end($columns)['base_expr']));
-        $values  = explode(',', str_replace(['(', ')', ' '], '', end($tokens['VALUES'])['base_expr']));
+        $values  = explode(',', preg_replace('/(^\()|(\)$)/', '', end($tokens['VALUES'])['base_expr']));
 
         return json_encode(array_combine($columns, array_map(function($value) {
+            $value = str_replace('\002C', ',', trim($value));
             return Value::create($value);
         }, $values)));
     }

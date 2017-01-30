@@ -30,6 +30,7 @@ class StatementHydra extends Statement {
         $restClient = $this->restClientFactory->createOne($request->getCurlOptions());
 
         $method = strtolower($request->getMethod());
+        $successedStatusCode = $this->getSuccessStatusCode($method);
         $this->initialQuery = $request->getQuery();
         $this->loadedPage = 0;
         $result = [];
@@ -42,7 +43,7 @@ class StatementHydra extends Statement {
             /** @var $response Response */
             $statusCode = $response->getStatusCode();
 
-            if ($statusCode === 200 || ($method === HttpMethods::DELETE && $statusCode === 204)) {
+            if ($statusCode === $successedStatusCode) {
                 $result = array_merge($result, $this->onSuccess($response, $method)); // parse and collect data
             } else {
                 return $this->onError($request, $response);
@@ -96,17 +97,41 @@ class StatementHydra extends Statement {
 
         if (!empty($body['hydra:totalItems'])) {
             if ($body['hydra:totalItems'] > 0 && !empty($body['hydra:member'])) {
-                foreach ($body['hydra:member'] as &$m) {
-                    $m['id'] = (int)substr($m['@id'], strrpos($m['@id'], '/') + 1);
+                foreach ($body['hydra:member'] as &$item) {
+                    $item = $this->parseIds($item);
                 }
-                unset($m);
-
                 return $body['hydra:member'];
             } else {
                 return [];
             }
+        } else {
+            return $this->parseIds($body);
         }
+    }
 
-        return $body;
+    protected function getSuccessStatusCode($method) {
+        $statusByMethod = [
+            HttpMethods::POST => 201,
+            HttpMethods::DELETE => 204,
+        ];
+        return !empty($statusByMethod[$method]) ? $statusByMethod[$method] : 200;
+    }
+
+    /**
+     * @param string $input
+     * @return int
+     */
+    protected function parseIds($input) {
+        $result = array();
+        foreach ($input as $key => $value) {
+            if ($key == '@id') {
+                $result['id'] = (int)substr($value, strrpos($value, '/') + 1);
+            }
+            if (is_array($value)) {
+                $value = $this->parseIds($value);
+            }
+            $result[$key] = $value;
+        }
+        return $result;
     }
 }

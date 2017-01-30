@@ -41,6 +41,8 @@ class Value {
     public static function create($value) {
         Assertions::assertString('value', $value);
 
+        if ($value === '') return null;
+
         $return = preg_replace('/\"$/', '', preg_replace('/^\"/', '', $value));
         if (!is_numeric($return)) return $return;
 
